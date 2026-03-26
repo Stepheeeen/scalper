@@ -1,0 +1,8 @@
+pydantic
+pandas
+numpy
+rich
+pytest
+MetaTrader5
+requests
+matplotlib
