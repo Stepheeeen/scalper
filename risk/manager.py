@@ -1,70 +1,75 @@
 import math
-from typing import Dict, Optional
+from utils.logger import logger
 
 class RiskManager:
-    """
-    Handles position sizing and global risk controls.
-    Ensures the 'preserve capital' philosophy is enforced.
-    """
     def __init__(self, config):
         self.config = config
-        self.daily_pnl = 0.0
-        self.trades_today = 0
-        self.start_balance = 0.0
+        self.daily_trades = 0
+        self.daily_loss_percent = 0.0
+        self.consecutive_losses = 0
+        self.initial_daily_balance = 0.0
 
-    def calculate_position_size(self, balance: float, stop_loss_pips: float, symbol: str = "XAUUSD") -> float:
+    def calculate_position_size(self, balance: float, entry_price: float, stop_loss: float) -> float:
         """
-        Calculates lot size based on % risk.
-        lot_size = (balance * risk%) / (sl_pips * pip_value)
+        Calculates lot size based on User Defined dynamic risk %.
+        Gold Formula: Lot Size = (Balance * Risk%) / (StopLoss Distance * 100)
         """
-        if stop_loss_pips <= 0:
-            return 0.0
-            
+        if balance <= 0 or entry_price == stop_loss:
+            return 0.01
+
         risk_amount = balance * (self.config.risk.risk_per_trade_percent / 100)
+        sl_dist_price = abs(entry_price - stop_loss)
         
-        # XAUUSD lot size calculation (Standard: 1 lot = 100oz)
-        # 1 pip in XAUUSD (0.10) for 1 lot = $10
-        # If sl_pips is the price difference (e.g., 2.50 points = 25 pips)
-        # lot_size = risk_amount / (stop_loss_points * 100)
+        if sl_dist_price == 0: return 0.01
         
-        lot_size = risk_amount / (stop_loss_pips * 100)
-        return round(lot_size, 2)
+        # Standard XAUUSD Calculation: $1 price move = $100 P/L for 1.00 Lot.
+        lot_size = risk_amount / (sl_dist_price * 100)
+        
+        # Round to 2 decimal places and enforce min (0.01) and safe max (5.00)
+        lot_size = round(max(0.01, min(lot_size, 5.0)), 2)
+        
+        logger.info(f"Risk: ${risk_amount:.2f} | SL Dist: {sl_dist_price:.2f} | Lots: {lot_size}")
+        return lot_size
 
-    def check_global_limits(self, current_balance: float) -> bool:
-        """
-        Enforces daily drawdown and max trades.
-        """
-        if self.trades_today >= self.config.risk.max_trades_per_day:
+    def should_move_to_be(self, entry_price: float, current_price: float, side: str) -> bool:
+        be_trigger = self.config.risk.be_profit_pips / 100
+        if side == "BUY":
+            return (current_price - entry_price) >= be_trigger
+        else:
+            return (entry_price - current_price) >= be_trigger
+
+    def enforce_daily_limits(self, balance: float, equity: float) -> bool:
+        """Enforces max trades, drawdown, and consecutive loss limits."""
+        if self.initial_daily_balance == 0:
+            self.initial_daily_balance = balance
+
+        # 1. Max Trades Check
+        if self.daily_trades >= self.config.risk.max_trades_per_day:
+            logger.warning(f"Daily trade limit ({self.config.risk.max_trades_per_day}) reached.")
             return False
             
-        if self.start_balance > 0:
-            drawdown = (self.start_balance - current_balance) / self.start_balance * 100
-            if drawdown >= self.config.risk.max_daily_drawdown_percent:
-                return False
-                
+        # 2. Max Drawdown Check
+        current_loss_percent = ((self.initial_daily_balance - equity) / self.initial_daily_balance) * 100
+        if current_loss_percent >= self.config.risk.max_daily_drawdown_percent:
+            logger.error(f"Daily drawdown limit ({self.config.risk.max_daily_drawdown_percent}%) reached. Trading Halted.")
+            return False
+            
+        # 3. Max Consecutive Losses Check
+        if self.consecutive_losses >= self.config.risk.max_consecutive_losses:
+            logger.warning(f"Max consecutive losses ({self.config.risk.max_consecutive_losses}) reached. Stop for the day.")
+            return False
+            
         return True
 
-    def update_daily_stats(self, pnl: float):
-        self.daily_pnl += pnl
-        self.trades_today += 1
-
-    def calculate_trailing_stop(self, current_price: float, side: str, atr_value: float) -> float:
-        """
-        Calculates a new stop loss based on ATR trailing.
-        """
-        multiplier = self.config.risk.move_to_breakeven_atr_multiple
-        if side.upper() == "BUY":
-            return current_price - (atr_value * multiplier)
+    def register_trade_result(self, profit_dollars: float):
+        """Updates daily statistics after a trade closes."""
+        self.daily_trades += 1
+        if profit_dollars <= 0:
+            self.consecutive_losses += 1
         else:
-            return current_price + (atr_value * multiplier)
+            self.consecutive_losses = 0
 
-    def calculate_partial_tp(self, entry_price: float, stop_loss: float, rr: float = 1.0) -> float:
-        """
-        Calculates the price for a partial take profit.
-        Default is 1:1 risk-reward.
-        """
-        risk = abs(entry_price - stop_loss)
-        if entry_price > stop_loss: # BUY
-            return entry_price + (risk * rr)
-        else: # SELL
-            return entry_price - (risk * rr)
+    def reset_daily_stats(self, current_balance: float):
+        self.daily_trades = 0
+        self.consecutive_losses = 0
+        self.initial_daily_balance = current_balance

@@ -4,5 +4,7 @@ numpy
 rich
 pytest
 MetaTrader5
+openai
 requests
 matplotlib
+python-dotenv

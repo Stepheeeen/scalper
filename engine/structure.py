@@ -10,139 +10,125 @@ class Trend(Enum):
 
 class MarketStructureEngine:
     """
-    Analyzes price action for Break of Structure (BOS) and Change of Character (CHOCH).
-    Handles trend bias calculation based on HTF (5m/15m).
+    Analyzes price action for HH/HL (Bullish) and LH/LL (Bearish) trends.
+    Detects Break of Structure (BOS) and Liquidity Pools.
     """
-    def __init__(self, fast_ema: int = 50, slow_ema: int = 200):
-        self.fast_ema = fast_ema
-        self.slow_ema = slow_ema
+    def __init__(self, window: int = 5):
+        self.window = window
 
     def calculate_bias(self, df: pd.DataFrame) -> Dict:
         """
-        Determines the directional bias using EMAs and Structure.
-        df must contain 'high', 'low', 'close' columns.
+        Determines the directional bias using HH/HL and LH/LL swing structure.
         """
-        if len(df) < self.slow_ema:
+        if len(df) < 50:
             return {"bias": Trend.NEUTRAL, "reason": "Insufficient data"}
 
-        # EMA Alignment
-        ema_fast = df['close'].ewm(span=self.fast_ema, adjust=False).mean()
-        ema_slow = df['close'].ewm(span=self.slow_ema, adjust=False).mean()
-        
-        last_close = df['close'].iloc[-1]
-        last_fast = ema_fast.iloc[-1]
-        last_slow = ema_slow.iloc[-1]
+        swings = self.detect_fractals(df)
+        highs = [h[1] for h in swings["highs"]]
+        lows = [l[1] for l in swings["lows"]]
 
-        ema_bullish = last_fast > last_slow and last_close > last_fast
-        ema_bearish = last_fast < last_slow and last_close < last_fast
+        if len(highs) < 2 or len(lows) < 2:
+            return {"bias": Trend.NEUTRAL, "reason": "No clear structure"}
 
-        # Simple Swing Detection for BOS/CHOCH
-        # In a real bot, this would use fractal highs/lows
-        highs = df['high'].rolling(window=5, center=True).max()
-        lows = df['low'].rolling(window=5, center=True).min()
+        # Check for HH/HL (Bullish)
+        is_hh = highs[-1] > highs[-2]
+        is_hl = lows[-1] > lows[-2]
         
-        # Determine Bias
+        # Check for LH/LL (Bearish)
+        is_lh = highs[-1] < highs[-2]
+        is_ll = lows[-1] < lows[-2]
+
         bias = Trend.NEUTRAL
-        if ema_bullish:
+        reason = "Ranging / No clear trend"
+
+        if is_hh and is_hl:
             bias = Trend.BULLISH
-        elif ema_bearish:
+            reason = "Market making Higher Highs and Higher Lows"
+        elif is_lh and is_ll:
             bias = Trend.BEARISH
+            reason = "Market making Lower Highs and Lower Lows"
+        elif is_hh and not is_hl:
+            bias = Trend.BULLISH
+            reason = "Bullish BOS detected, waiting for HL"
+        elif is_ll and not is_lh:
+            bias = Trend.BEARISH
+            reason = "Bearish BOS detected, waiting for LH"
 
         return {
             "bias": bias,
-            "ema_fast": last_fast,
-            "ema_slow": last_slow,
-            "ema_aligned": ema_bullish or ema_bearish
+            "reason": reason,
+            "last_high": highs[-1],
+            "last_low": lows[-1],
+            "prev_high": highs[-2],
+            "prev_low": lows[-2]
         }
 
-    def detect_fractals(self, df: pd.DataFrame, window: int = 2) -> Dict:
+    def detect_fractals(self, df: pd.DataFrame) -> Dict[str, List]:
         """
-        Identifies fractal highs and lows.
+        Identifies fractal highs and lows (swing points).
+        Uses a configurable window (default 5).
         """
         highs = df['high'].values
         lows = df['low'].values
         fractal_highs = []
         fractal_lows = []
         
-        for i in range(window, len(df) - window):
-            if all(highs[i] > highs[i-j] for j in range(1, window+1)) and \
-               all(highs[i] > highs[i+j] for j in range(1, window+1)):
+        for i in range(self.window, len(df) - self.window):
+            # Fractal High: Highest in the window
+            if all(highs[i] >= highs[i-j] for j in range(1, self.window+1)) and \
+               all(highs[i] > highs[i+j] for j in range(1, self.window+1)):
                 fractal_highs.append((i, highs[i]))
-            if all(lows[i] < lows[i-j] for j in range(1, window+1)) and \
-               all(lows[i] < lows[i+j] for j in range(1, window+1)):
+            
+            # Fractal Low: Lowest in the window
+            if all(lows[i] <= lows[i-j] for j in range(1, self.window+1)) and \
+               all(lows[i] < lows[i+j] for j in range(1, self.window+1)):
                 fractal_lows.append((i, lows[i]))
         
         return {"highs": fractal_highs, "lows": fractal_lows}
 
-    def detect_fvg(self, df: pd.DataFrame) -> List[Dict]:
+    def find_liquidity_pools(self, df: pd.DataFrame) -> Dict[str, List[float]]:
         """
-        Identifies Fair Value Gaps (FVG) / Imbalances.
-        A bullish FVG: Low of candle 3 > High of candle 1
-        A bearish FVG: High of candle 3 < Low of candle 1
+        Identifies 'Equal Highs' and 'Equal Lows' where liquidity resides.
         """
-        fvgs = []
-        if len(df) < 3: return fvgs
+        swings = self.detect_fractals(df)
+        highs = [h[1] for h in swings["highs"]]
+        lows = [l[1] for l in swings["lows"]]
         
-        for i in range(2, len(df)):
-            # Bullish FVG
-            if df['low'].iloc[i] > df['high'].iloc[i-2]:
-                fvgs.append({
-                    "type": "BULLISH",
-                    "top": df['low'].iloc[i],
-                    "bottom": df['high'].iloc[i-2],
-                    "index": i-1
-                })
-            # Bearish FVG
-            elif df['high'].iloc[i] < df['low'].iloc[i-2]:
-                fvgs.append({
-                    "type": "BEARISH",
-                    "top": df['low'].iloc[i-2],
-                    "bottom": df['high'].iloc[i],
-                    "index": i-1
-                })
-        return fvgs
-
-    def detect_displacement(self, df: pd.DataFrame, atr_threshold: float) -> bool:
-        """
-        A displacement candle is a large momentum candle that shows strong 'intent'.
-        Typically > 1.5x - 2x the recent ATR.
-        """
-        if len(df) < 2: return False
-        body_size = abs(df['close'].iloc[-1] - df['open'].iloc[-1])
-        return body_size > atr_threshold
-
-    def detect_order_blocks(self, df: pd.DataFrame) -> List[Dict]:
-        """
-        Identifies Order Blocks (OB).
-        Bullish OB: Last bearish candle before a strong bullish move.
-        Bearish OB: Last bullish candle before a strong bearish move.
-        """
-        obs = []
-        if len(df) < 5: return obs
+        eqh = []
+        eql = []
+        threshold = 0.0005 # 5 pips for XAUUSD (pips are 0.01, so 0.0005 is 0.05 points)
+        # Actually for Gold, 0.10 points is 10 pips. 0.05 points = 5 pips.
         
-        for i in range(1, len(df) - 1):
-            # Bullish OB: Bearish candle followed by a strong Bullish candle
-            if df['close'].iloc[i] < df['open'].iloc[i]: # Bearish candle
-                if df['close'].iloc[i+1] > df['open'].iloc[i+1]: # Next is Bullish
-                    # Check for displacement or BOS (Simplified here)
-                    if (df['close'].iloc[i+1] - df['open'].iloc[i+1]) > (df['high'].iloc[i-3:i].max() - df['low'].iloc[i-3:i].min()):
-                        obs.append({
-                            "type": "BULLISH",
-                            "top": df['high'].iloc[i],
-                            "bottom": df['low'].iloc[i],
-                            "index": i,
-                            "timestamp": df.index[i]
-                        })
+        for i in range(len(highs)-1):
+            for j in range(i+1, len(highs)):
+                if abs(highs[i] - highs[j]) < 0.10: # ~10 pips
+                    eqh.append(max(highs[i], highs[j]))
+                    
+        for i in range(len(lows)-1):
+            for j in range(i+1, len(lows)):
+                if abs(lows[i] - lows[j]) < 0.10:
+                    eql.append(min(lows[i], lows[j]))
+                    
+        return {"equal_highs": list(set(eqh)), "equal_lows": list(set(eql))}
+
+    def detect_bos_choch(self, df: pd.DataFrame) -> Dict:
+        """
+        Detects Break of Structure (BOS) and Change of Character (CHOCH).
+        BOS: Trend continuation.
+        CHOCH: Shift in trend.
+        """
+        swings = self.detect_fractals(df)
+        if len(swings['highs']) < 2 or len(swings['lows']) < 2:
+            return {"type": None}
+
+        last_high = swings['highs'][-1][1]
+        last_low = swings['lows'][-1][1]
+        current_price = df['close'].iloc[-1]
+
+        # Simplified logic:
+        if current_price > last_high:
+            return {"type": "BOS", "side": "BULLISH", "level": last_high}
+        elif current_price < last_low:
+            return {"type": "BOS", "side": "BEARISH", "level": last_low}
             
-            # Bearish OB: Bullish candle followed by a strong Bearish candle
-            elif df['close'].iloc[i] > df['open'].iloc[i]: # Bullish candle
-                if df['close'].iloc[i+1] < df['open'].iloc[i+1]: # Next is Bearish
-                    if (df['open'].iloc[i+1] - df['close'].iloc[i+1]) > (df['high'].iloc[i-3:i].max() - df['low'].iloc[i-3:i].min()):
-                        obs.append({
-                            "type": "BEARISH",
-                            "top": df['high'].iloc[i],
-                            "bottom": df['low'].iloc[i],
-                            "index": i,
-                            "timestamp": df.index[i]
-                        })
-        return obs
+        return {"type": None}

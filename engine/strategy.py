@@ -1,111 +1,104 @@
+import pandas as pd
+import numpy as np
 from typing import Dict, Optional
-from .structure import MarketStructureEngine, Trend
-from .liquidity import LiquidityEngine, LiquidityZone
 from utils.logger import logger
+from .structure import MarketStructureEngine, Trend
 
 class StrategyEngine:
     """
-    The brain of the bot. Integrates structure, liquidity, and momentum 
-    to generate high-probability trade signals.
+    Implements a professional 5/20 EMA Crossover strategy for XAUUSD.
+    Includes M15 Trend Filter and Swing-based SL logic.
     """
     def __init__(self, config):
         self.config = config
         self.structure = MarketStructureEngine()
-        self.liquidity = LiquidityEngine()
 
     def analyze(self, data: Dict[str, pd.DataFrame]) -> Optional[Dict]:
         """
-        Analyzes the provided data to generate trade signals.
+        Analyzes 1m/5m/15m data for EMA crossovers and trend alignment.
         """
         df_1m = data.get('1m')
         df_5m = data.get('5m')
         df_15m = data.get('15m')
 
-        if df_1m is None or df_5m is None or df_15m is None or df_1m.empty or df_5m.empty or df_15m.empty:
+        if any(df is None or df.empty for df in [df_1m, df_5m, df_15m]):
             return None
 
-        # 1. HTF Bias (15m/5m Alignment)
-        bias_15m = self.structure.calculate_bias(df_15m)
-        bias_5m = self.structure.calculate_bias(df_5m)
+        # 1. Trend Filter (M15 200 EMA)
+        ema_200_m15 = df_15m['close'].ewm(span=self.config.strategy.trend_ema, adjust=False).mean()
+        current_price_m15 = df_15m['close'].iloc[-1]
+        trend_m15 = Trend.BULLISH if current_price_m15 > ema_200_m15.iloc[-1] else Trend.BEARISH
         
-        if bias_15m['bias'] == Trend.NEUTRAL or bias_15m['bias'] != bias_5m['bias']:
-            logger.debug(f"Skipping: Bias mismatch (15m: {bias_15m['bias'].value}, 5m: {bias_5m['bias'].value})")
-            return None
-        
-        current_bias = bias_15m['bias']
+        # 2. Crossover Detection (1m or 5m based on preference, here using 1m for scalping)
+        ema_5 = df_1m['close'].ewm(span=self.config.strategy.ema_fast, adjust=False).mean()
+        ema_20 = df_1m['close'].ewm(span=self.config.strategy.ema_slow, adjust=False).mean()
 
-        # 1.5 Premium/Discount Filter (HTF Alignment)
-        pd_15m = self.liquidity.calculate_premium_discount(df_15m)
-        if current_bias == Trend.BULLISH and not pd_15m.get('is_discount'):
-            logger.debug("Skipping: Bias is Bullish but price is in Premium zone.")
-            return None
-        if current_bias == Trend.BEARISH and not pd_15m.get('is_premium'):
-            logger.debug("Skipping: Bias is Bearish but price is in Discount zone.")
-            return None
+        # Check for crossover in the last 2 candles
+        previous_fast = ema_5.iloc[-2]
+        previous_slow = ema_20.iloc[-2]
+        current_fast = ema_5.iloc[-1]
+        current_slow = ema_20.iloc[-1]
 
-        # 2. Identify Liquidity
-        asian_range = self.liquidity.get_asian_range(df_15m)
-        zones = []
-        if asian_range:
-            zones.append(LiquidityZone(price=asian_range['high'], type='BSL', description="Asian High"))
-            zones.append(LiquidityZone(price=asian_range['low'], type='SSL', description="Asian Low"))
+        is_bullish_cross = previous_fast <= previous_slow and current_fast > current_slow
+        is_bearish_cross = previous_fast >= previous_slow and current_fast < current_slow
 
-        # 3. Detect Sweep on 1m
-        current_price = df_1m['close'].iloc[-1]
-        sweep = self.liquidity.detect_sweep(current_price, zones)
-        
-        if not sweep:
-            if self.config.provider != 'csv':
-                logger.debug("Skipping: No liquidity sweep detected on 1m chart.")
-                return None
-            # Backtest relaxation: artificial sweep to verify risk logic
-            sweep = LiquidityZone(
-                price=current_price, 
-                type='SSL' if current_bias == Trend.BULLISH else 'BSL', 
-                description="Backtest Generated Sweep"
-            )
+        signal_side = None
+        reason = ""
 
-        # 4. CHOCH & Displacement (Logic check for reversal after sweep)
-        is_valid_setup = False
-        if current_bias == Trend.BULLISH and sweep.type == 'SSL':
-            # Simplified: Look for displacement candle in bias direction
-            atr = df_1m['high'].iloc[-10:-1].max() - df_1m['low'].iloc[-10:-1].min()
-            if self.structure.detect_displacement(df_1m, atr * 0.05): # Very relaxed for verification
-                is_valid_setup = True
-        
-        elif current_bias == Trend.BEARISH and sweep.type == 'BSL':
-            atr = df_1m['high'].iloc[-10:-1].max() - df_1m['low'].iloc[-10:-1].min()
-            if self.structure.detect_displacement(df_1m, atr * 0.05):
-                is_valid_setup = True
+        if is_bullish_cross:
+            if trend_m15 == Trend.BULLISH:
+                signal_side = "BUY"
+                reason = "5/20 EMA Bullish Cross aligned with M15 Trend"
+            else:
+                logger.debug("Bullish cross detected but M15 Trend is Bearish. Skipping.")
 
-        if not is_valid_setup:
-            logger.debug("Skipping: Sweep detected but no displacement/setup confirmed.")
+        elif is_bearish_cross:
+            if trend_m15 == Trend.BEARISH:
+                signal_side = "SELL"
+                reason = "5/20 EMA Bearish Cross aligned with M15 Trend"
+            else:
+                logger.debug("Bearish cross detected but M15 Trend is Bullish. Skipping.")
+
+        if not signal_side:
             return None
 
-        # 5. Order Block (OB) Check
-        obs = self.structure.detect_order_blocks(df_1m)
-        relevant_ob = None
-        if obs:
-            # Look for most recent OB of the correct type
-            for ob in reversed(obs):
-                if ob['type'] == current_bias.value:
-                    relevant_ob = ob
-                    break
+        # 3. Dynamic Stop Loss (Recent Swing High/Low)
+        # Using previous 10 candles (excluding current) for swings
+        lookback = 10
+        min_sl_dist = 0.50 # 5 pips minimum for Gold
+        max_sl_dist = 2.50 # 25 pips maximum
+        entry = df_1m['close'].iloc[-1]
 
-        # 6. Find Entry FVG
-        fvgs = self.structure.detect_fvg(df_1m)
-        if not fvgs:
-            # Relaxed for backtest: allow entry without FVG if displacement is strong
-            latest_fvg_price = current_price
+        if signal_side == "BUY":
+            swing_low = df_1m['low'].iloc[-lookback-1:-1].min()
+            sl = min(entry - min_sl_dist, max(swing_low, entry - max_sl_dist))
         else:
-            latest_fvg = fvgs[-1]
-            latest_fvg_price = latest_fvg['top'] if current_bias == Trend.BULLISH else latest_fvg['bottom']
+            swing_high = df_1m['high'].iloc[-lookback-1:-1].max()
+            sl = max(entry + min_sl_dist, min(swing_high, entry + max_sl_dist))
 
         return {
             "symbol": self.config.strategy.symbol,
-            "side": "BUY" if current_bias == Trend.BULLISH else "SELL",
-            "entry_price": latest_fvg_price,
-            "stop_loss": df_1m['low'].min() if current_bias == Trend.BULLISH else df_1m['high'].max(), # Aggressive SL
-            "reason": f"Sweep of {sweep.description} + P/D Alignment",
-            "ob_detected": True if relevant_ob else False
+            "side": signal_side,
+            "entry_price": df_1m['close'].iloc[-1],
+            "stop_loss": sl,
+            "reason": reason
         }
+
+    def check_exit_condition(self, current_data: pd.DataFrame, side: str) -> bool:
+        """
+        Checks for a 'Reverse Crossover' to exit trades early.
+        """
+        if len(current_data) < 2: return False
+        
+        ema_5 = current_data['close'].ewm(span=self.config.strategy.ema_fast, adjust=False).mean()
+        ema_20 = current_data['close'].ewm(span=self.config.strategy.ema_slow, adjust=False).mean()
+        
+        current_fast = ema_5.iloc[-1]
+        current_slow = ema_20.iloc[-1]
+        
+        if side == "BUY" and current_fast < current_slow:
+            return True # Exit on Bearish Cross
+        if side == "SELL" and current_fast > current_slow:
+            return True # Exit on Bullish Cross
+            
+        return False

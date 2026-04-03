@@ -1,179 +1,167 @@
 import time
-import pandas as pd
+import schedule
+from datetime import datetime
 from config import config
-from data_feed.base import MockDataProvider
-from engine.strategy import StrategyEngine
+from data_feed.mt5_adapter import MT5Adapter
+from data_feed.market_data import MarketDataManager
+from engine.setups import SetupEngine
+from engine.confirmation import ConfirmationEngine
+from engine.trade_manager import TradeManager
 from risk.manager import RiskManager
-from utils.logger import logger
 from utils.telegram import TelegramNotifier
+from utils.ai_assistant import AIAssistant
 from utils.database import DatabaseManager
-from utils.charting import generate_equity_chart
+from utils.logger import logger
 
-class ScalpBot:
+class NakedPriceActionBot:
     def __init__(self):
         self.config = config
-        
-        # Select Data Provider
-        if config.provider == "mt5":
-            from data_feed.mt5_feed import MT5DataProvider
-            self.data_provider = MT5DataProvider(
-                login=config.mt5_login, 
-                password=config.mt5_password, 
-                server=config.mt5_server,
-                symbol_suffix=config.strategy.symbol_suffix
-            )
-        else:
-            self.data_provider = MockDataProvider()
-            
-        self.strategy = StrategyEngine(config)
+        self.broker = MT5Adapter(config)
+        self.market_data = MarketDataManager()
+        self.setup_engine = SetupEngine()
         self.risk_manager = RiskManager(config)
+        self.confirmation = ConfirmationEngine(config)
+        self.trade_manager = TradeManager(self.broker, self.risk_manager)
         self.notifier = TelegramNotifier(config.telegram_token, config.telegram_chat_id)
+        self.ai = AIAssistant(config.ai.api_key)
         self.db = DatabaseManager()
+        
         self.is_running = False
-        self.tg_offset = None
-        self.last_equity_log = 0 
 
     def start(self):
-        logger.info("[bold green]Starting XAUUSD Scalp Bot...[/bold green]")
-        
-        if not self.data_provider.connect():
-            error_msg = "Failed to connect to data provider. Bot will not start."
-            logger.error(error_msg)
-            self.notifier.send_alert("ERROR", error_msg)
+        """Initializes and starts the bot."""
+        if not self.broker.connect():
+            self.notifier.send_alert("ERROR", "Failed to connect to MT5.")
             return
 
-        # Pre-Flight Account Check
-        if self.config.provider == "mt5":
-            acc = self.data_provider.get_account_info()
-            if acc:
-                balance_str = f"{acc['balance']} {acc['currency']}"
-                logger.info(f"Account Info: {balance_str} | Leverage: 1:{acc['leverage']}")
-                self.notifier.send_message(f"✅ *MT5 Connected*\n💰 *Balance:* `{balance_str}`\n📈 *Equity:* `{acc['equity']}`")
-            else:
-                logger.warning("Could not retrieve MT5 account info.")
-
-        self.notifier.send_message(f"🚀 *XAUUSD Scalp Bot Started* ({self.config.provider.upper()})")
         self.is_running = True
+        logger.info("Naked Price Action Bot Started.")
+        self.notifier.send_alert("SUCCESS", "Bot Online: Mode 1 (Paper Trading / Rule Engine Only)")
+        
+        # Schedule Daily Open Summary
+        schedule.every().day.at("06:45").do(self.send_daily_outlook)
+        
         self.run_loop()
 
-    def handle_commands(self):
-        """
-        Polls Telegram for commands and executes them.
-        """
-        try:
-            updates = self.notifier.get_updates(offset=self.tg_offset)
-            for update in updates:
-                self.tg_offset = update['update_id'] + 1
-                if 'message' in update and 'text' in update['message']:
-                    text = update['message']['text']
-                    chat_id = str(update['message']['chat']['id'])
-                    
-                    if chat_id != self.config.telegram_chat_id:
-                        continue 
-                        
-                    if text == '/status':
-                        status = (
-                            f"📊 *Bot Status:* {'Running' if self.is_running else 'Stopped'}\n"
-                            f"💰 *Provider:* `{self.config.provider}`\n"
-                            f"📈 *Risk:* `{self.config.risk.risk_per_trade_percent}%`"
-                        )
-                        self.notifier.send_message(status)
-                    elif text == '/stop':
-                        self.notifier.send_message("🛑 *Stopping bot via command...*")
-                        self.is_running = False
-                    elif text.startswith('/risk'):
-                        parts = text.split(' ')
-                        if len(parts) > 1:
-                            new_risk = float(parts[1])
-                            self.config.risk.risk_per_trade_percent = new_risk
-                            self.notifier.send_message(f"✅ *Risk updated to:* `{new_risk}%`")
-                    elif text == '/report':
-                        self.notifier.send_message("📊 *Generating your performance report...*")
-                        equity_data = self.db.get_equity_data()
-                        chart_path = generate_equity_chart(equity_data)
-                        if chart_path:
-                            self.notifier.send_photo(chart_path, "📈 *Your Equity Curve*")
-                        else:
-                            self.notifier.send_message("❌ *Not enough data yet to generate a chart.*")
-        except Exception as e:
-            logger.debug(f"Command handling error: {e}")
+    def send_daily_outlook(self):
+        """Generates and sends the daily market overview via Telegram."""
+        # Fetch HTF data for bias
+        df_htf = self.broker.get_candles(
+            config.strategy.symbol + config.strategy.symbol_suffix, 
+            config.strategy.htf_timeframe, 100
+        )
+        df_d1 = self.broker.get_candles(
+            config.strategy.symbol + config.strategy.symbol_suffix, "D1", 5
+        )
+        
+        levels = self.market_data.calculate_levels(df_htf, df_d1)
+        bias_info = self.setup_engine.structure.calculate_bias(df_htf)
+        
+        summary_data = {
+            "date": datetime.now().strftime("%Y-%m-%d"),
+            "symbol": config.strategy.symbol,
+            "bias": bias_info['bias'].value,
+            "pdh": levels.get('pdh'),
+            "pdl": levels.get('pdl'),
+            "sessions": "London: 07:00-10:00 | NY: 12:00-15:00 UTC",
+            "scenarios": f"Looking for {bias_info['bias'].value} setups at prior structural levels."
+        }
+        self.notifier.send_daily_open(summary_data)
 
     def run_loop(self):
+        """Main execution loop."""
         while self.is_running:
             try:
-                # 0. Handle Commands
-                self.handle_commands()
-                if not self.is_running: break
-
-                # 0.5 Log Equity Snapshot (Every ~3 mins)
-                now = time.time()
-                if now - self.last_equity_log > 180: # 180s = 3 mins
-                    acc = self.data_provider.get_account_info() if self.config.provider == "mt5" else None
-                    if acc:
-                        self.db.log_equity(acc['balance'], acc['equity'])
-                    else:
-                        self.db.log_equity(1000.0, 1000.0) # Mock
-                    self.last_equity_log = now
-
-                # 1. Fetch Data
-                data = {
-                    '1m': self.data_provider.get_latest_candles(self.config.strategy.symbol, "1m", 300),
-                    '5m': self.data_provider.get_latest_candles(self.config.strategy.symbol, "5m", 300),
-                    '15m': self.data_provider.get_latest_candles(self.config.strategy.symbol, "15m", 300)
-                }
-
-                # Check for fetch errors
-                for tf, df in data.items():
-                    if df is None or df.empty:
-                        warn_msg = f"Failed to fetch {tf} data for {self.config.strategy.symbol}. Retrying next cycle..."
-                        logger.warning(warn_msg)
-                        self.notifier.send_alert("WARNING", warn_msg)
-                        time.sleep(20)
+                now_utc = datetime.utcnow()
+                session_status = self.market_data.get_session_status(now_utc)
+                
+                # Update account and risk stats
+                acc = self.broker.get_account_info()
+                if acc:
+                    self.db.log_equity(acc['balance'], acc['equity'])
+                    # Daily stats check
+                    if not self.risk_manager.enforce_daily_limits(acc['balance'], acc['equity']):
+                        time.sleep(60)
                         continue
 
-                logger.info(f"--- Cycle heartbeat [{time.strftime('%H:%M:%S')}] ---")
+                # 1. Manage Active Positions
+                tick = {"bid": mt5.symbol_info_tick(config.strategy.symbol + config.strategy.symbol_suffix).bid,
+                        "ask": mt5.symbol_info_tick(config.strategy.symbol + config.strategy.symbol_suffix).ask}
+                self.trade_manager.manage_lifecycle(tick)
 
-                # 2. Risk Check
-                if not self.risk_manager.check_global_limits(10000): # Mock balance
-                    limit_msg = "Global risk limits reached (Max trades or Drawdown). Skipping cycle."
-                    logger.warning(limit_msg)
-                    self.notifier.send_alert("WARNING", limit_msg)
-                    time.sleep(60)
-                    continue
-
-                # 3. Analyze
-                signal = self.strategy.analyze(data)
-                
-                if signal:
-                    logger.info(f"[bold cyan]SIGNAL DETECTED:[/bold cyan] {signal['side']} at {signal['entry_price']} | {signal['reason']}")
-                    self.notifier.send_signal(
-                        signal['symbol'], signal['side'], signal['entry_price'], 
-                        signal['stop_loss'], signal['reason']
-                    )
+                # 2. Scanning Block (Only during sessions)
+                if session_status['is_market_open']:
+                    symbol = config.strategy.symbol + config.strategy.symbol_suffix
+                    df_entry = self.broker.get_candles(symbol, config.strategy.entry_timeframe, 100)
+                    df_htf = self.broker.get_candles(symbol, config.strategy.htf_timeframe, 100)
+                    df_d1 = self.broker.get_candles(symbol, "D1", 5)
                     
-                    # 4. Execute (In Paper Mode)
-                    if self.config.paper_trading:
-                        # lot_size = self.risk_manager.calculate_position_size(...)
-                        res = self.data_provider.execute_order(
-                            signal['symbol'], signal['side'], 0.1, signal['stop_loss'], 0
-                        )
-                        logger.info(f"Execution response: {res}")
-                        
-                        # Log to DB
-                        self.db.log_signal(
-                            signal['symbol'], signal['side'], signal['reason'], signal['entry_price']
-                        )
+                    levels = self.market_data.calculate_levels(df_htf, df_d1)
+                    market_context = {
+                        "is_market_open": True,
+                        "bias": self.setup_engine.structure.calculate_bias(df_htf)['bias'].value,
+                        **levels
+                    }
 
-                time.sleep(10) # 10s polling for scalping
-                
-            except KeyboardInterrupt:
-                logger.info("Shutting down bot...")
-                self.notifier.send_message("🛑 *XAUUSD Scalp Bot Shutting Down*")
-                self.is_running = False
+                    setups = self.setup_engine.scan({"entry": df_entry, "htf": df_htf}, levels)
+                    
+                    for setup in setups:
+                        # Validation & Confirmation
+                        valid_setup = self.confirmation.validate_setup(setup, market_context)
+                        
+                        if valid_setup:
+                            self.handle_execution(valid_setup, acc['balance'])
+                        elif config.log_skipped_setups:
+                            # Log skipped setup for auditing
+                            ai_explanation = self.ai.explain_skipped_setup(setup, "Low confluence or poor RR")
+                            self.db.log_skipped_setup({
+                                "symbol": config.strategy.symbol,
+                                "strategy": setup['type'],
+                                "reason": ai_explanation,
+                                "score": setup.get('confluence_score', 0),
+                                "context": str(market_context)
+                            })
+
+                schedule.run_pending()
+
             except Exception as e:
-                logger.error(f"Error in main loop: {e}", exc_info=True)
-                time.sleep(10)
+                logger.error(f"Main loop error: {e}")
+                time.sleep(30)
+            
+            time.sleep(10)
+
+    def handle_execution(self, setup: Dict, balance: float):
+        """Processes a validated setup and executes if possible."""
+        # Calculate Risk and Position
+        lots = self.risk_manager.calculate_position_size(balance, setup['entry_price'], setup['stop_loss'])
+        
+        # AI Commentary
+        commentary = self.ai.generate_setup_commentary(setup, {"bias": setup['bias_alignment']})
+        
+        res = self.broker.execute_order(
+            config.strategy.symbol + config.strategy.symbol_suffix,
+            setup['side'], lots, setup['stop_loss'], setup['tp']
+        )
+        
+        if res:
+            trade_data = {
+                "strategy": setup['type'],
+                "side": setup['side'],
+                "entry": setup['entry_price'],
+                "sl": setup['stop_loss'],
+                "tp": setup['tp'],
+                "rr": setup['rr'],
+                "risk_percent": config.risk.risk_per_trade_percent,
+                "rationale": commentary
+            }
+            self.notifier.send_entry_alert(trade_data)
+            self.trade_manager.add_position(res['ticket'], setup['side'], setup['entry_price'], setup['stop_loss'], setup['tp'], lots)
+
+    def stop(self):
+        self.is_running = False
+        self.broker.disconnect()
 
 if __name__ == "__main__":
-    bot = ScalpBot()
+    import MetaTrader5 as mt5
+    bot = NakedPriceActionBot()
     bot.start()

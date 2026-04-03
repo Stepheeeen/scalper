@@ -1,0 +1,10 @@
+.env
+.env.example
+__pycache__/
+*.pyc
+.pytest_cache/
+bot_data.db
+test_bot.db
+logs/
+.DS_Store
+equity_curve.png

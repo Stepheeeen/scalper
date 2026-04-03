@@ -1,7 +1,5 @@
 import pandas as pd
 from utils.logger import logger
-from rich.table import Table
-from rich.console import Console
 from engine.strategy import StrategyEngine
 from risk.manager import RiskManager
 
@@ -26,48 +24,76 @@ class BacktestEngine:
             
             if data['1m'].empty: continue
 
-            # Check for existing trade exit
-            self.manage_trades(data['1m'].iloc[-1])
+            # 1. Manage existing trades (SL, TP, BE, Reverse Cross)
+            self.manage_trades(data['1m'])
 
-            # Analyze for new signal
+            # 2. Analyze for new signal
             signal = self.strategy.analyze(data)
             if signal:
-                self.execute_trade(signal, data['1m'].iloc[-1])
+                # Only one trade at a time for this strategy
+                if not any(t['status'] == 'OPEN' for t in self.trades):
+                    self.execute_trade(signal, data['1m'].iloc[-1])
 
             self.equity_curve.append(self.balance)
 
         self.report()
 
     def execute_trade(self, signal, current_candle):
-        sl_pips = abs(signal['entry_price'] - signal['stop_loss'])
-        lots = self.risk_manager.calculate_position_size(self.balance, sl_pips)
+        lots = self.risk_manager.calculate_position_size(
+            self.balance, signal['entry_price'], signal['stop_loss']
+        )
         
         if lots > 0:
+            sl_dist = abs(signal['entry_price'] - signal['stop_loss'])
+            tp = signal['entry_price'] + (sl_dist * self.config.risk.min_rr_ratio) if signal['side'] == "BUY" else signal['entry_price'] - (sl_dist * self.config.risk.min_rr_ratio)
+            
             trade = {
                 'entry_time': current_candle.name,
                 'side': signal['side'],
                 'entry_price': signal['entry_price'],
                 'stop_loss': signal['stop_loss'],
+                'original_sl': signal['stop_loss'],
+                'tp': tp,
                 'lots': lots,
-                'status': 'OPEN'
+                'status': 'OPEN',
+                'is_be': False
             }
             self.trades.append(trade)
             logger.info(f"BACKTEST: Opened {trade['side']} at {trade['entry_price']}")
 
-    def manage_trades(self, candle):
+    def manage_trades(self, df_1m):
+        candle = df_1m.iloc[-1]
         for trade in self.trades:
             if trade['status'] == 'OPEN':
+                # Prevent Managing on the same candle it was opened
+                if candle.name == trade['entry_time']:
+                    continue
+                
+                # A. Check SL/TP
                 if trade['side'] == 'BUY':
                     if candle['low'] <= trade['stop_loss']:
                         self.close_trade(trade, trade['stop_loss'], candle.name, "SL")
-                    # Simplified TP for backtest example
-                    elif candle['high'] >= trade['entry_price'] + (trade['entry_price'] - trade['stop_loss']) * 1.5:
-                         self.close_trade(trade, trade['entry_price'] + (trade['entry_price'] - trade['stop_loss']) * 1.5, candle.name, "TP")
+                        continue
+                    if candle['high'] >= trade['tp']:
+                        self.close_trade(trade, trade['tp'], candle.name, "TP")
+                        continue
                 else: # SELL
                     if candle['high'] >= trade['stop_loss']:
                         self.close_trade(trade, trade['stop_loss'], candle.name, "SL")
-                    elif candle['low'] <= trade['entry_price'] - (trade['stop_loss'] - trade['entry_price']) * 1.5:
-                        self.close_trade(trade, trade['entry_price'] - (trade['stop_loss'] - trade['entry_price']) * 1.5, candle.name, "TP")
+                        continue
+                    if candle['low'] <= trade['tp']:
+                        self.close_trade(trade, trade['tp'], candle.name, "TP")
+                        continue
+
+                # B. Check for Break-Even Trigger
+                if not trade['is_be'] and self.risk_manager.should_move_to_be(trade['entry_price'], candle['close'], trade['side']):
+                    trade['stop_loss'] = trade['entry_price']
+                    trade['is_be'] = True
+                    logger.debug(f"BACKTEST: Trade moved to BE at {candle.name}")
+
+                # C. Check for Reverse Crossover Exit
+                if self.strategy.check_exit_condition(df_1m, trade['side']):
+                    self.close_trade(trade, candle['close'], candle.name, "Reverse Cross")
 
     def close_trade(self, trade, price, time, reason):
         # 1 lot = 100oz. PnL = (price_diff) * 100 * lots
@@ -77,7 +103,7 @@ class BacktestEngine:
         trade['exit_price'] = price
         trade['exit_time'] = time
         trade['pnl'] = pnl
-        logger.debug(f"BACKTEST: Closed {reason} | PnL: {pnl:.2f}")
+        logger.info(f"BACKTEST: Closed {reason} at {price} | PnL: ${pnl:.2f}")
 
     def report(self):
         df_trades = pd.DataFrame([t for t in self.trades if t['status'] == 'CLOSED'])

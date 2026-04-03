@@ -10,36 +10,42 @@ class DatabaseManager:
         self._init_db()
 
     def _init_db(self):
-        """Initialize the SQLite database and create tables if they don't exist."""
+        """Initialize the SQLite database with professional journaling schema."""
         try:
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
                 
-                # Trades Table
+                # Trades Table (Expanded)
                 cursor.execute("""
                     CREATE TABLE IF NOT EXISTS trades (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         ticket INTEGER UNIQUE,
                         symbol TEXT,
-                        type TEXT,
+                        side TEXT,
+                        strategy TEXT,
                         entry_price REAL,
                         sl REAL,
                         tp REAL,
-                        profit REAL,
+                        profit_dollars REAL,
+                        profit_percent REAL,
+                        pnl_r REAL,
+                        confluence_score INTEGER,
+                        ai_note TEXT,
                         close_time DATETIME,
                         volume REAL
                     )
                 """)
                 
-                # Signals/Events Table
+                # Skipped Setups Table (New)
                 cursor.execute("""
-                    CREATE TABLE IF NOT EXISTS signals (
+                    CREATE TABLE IF NOT EXISTS skipped_setups (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
                         symbol TEXT,
-                        type TEXT,
-                        reason TEXT,
-                        price REAL
+                        strategy TEXT,
+                        reason_skipped TEXT,
+                        confluence_score INTEGER,
+                        market_context TEXT
                     )
                 """)
                 
@@ -54,27 +60,32 @@ class DatabaseManager:
                 """)
                 
                 conn.commit()
-                logger.info(f"Database initialized at {self.db_path}")
         except Exception as e:
             logger.error(f"Failed to initialize database: {e}")
 
     def log_trade(self, trade_data: Dict[str, Any]):
-        """Logs a completed trade to the database."""
+        """Logs a completed trade with all confluences and AI commentary."""
         try:
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
                 cursor.execute("""
                     INSERT OR REPLACE INTO trades 
-                    (ticket, symbol, type, entry_price, sl, tp, profit, close_time, volume)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    (ticket, symbol, side, strategy, entry_price, sl, tp, 
+                     profit_dollars, profit_percent, pnl_r, confluence_score, ai_note, close_time, volume)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
                     trade_data.get('ticket'),
                     trade_data.get('symbol'),
-                    trade_data.get('type'),
+                    trade_data.get('side'),
+                    trade_data.get('strategy'),
                     trade_data.get('entry_price'),
                     trade_data.get('sl'),
                     trade_data.get('tp'),
-                    trade_data.get('profit'),
+                    trade_data.get('profit_dollars'),
+                    trade_data.get('profit_percent'),
+                    trade_data.get('pnl_r'),
+                    trade_data.get('confluence_score'),
+                    trade_data.get('ai_note'),
                     trade_data.get('close_time', datetime.now().isoformat()),
                     trade_data.get('volume')
                 ))
@@ -82,42 +93,30 @@ class DatabaseManager:
         except Exception as e:
             logger.error(f"Error logging trade to DB: {e}")
 
-    def log_signal(self, symbol: str, signal_type: str, reason: str, price: float):
-        """Logs a strategy signal/event."""
+    def log_skipped_setup(self, setup_data: Dict[str, Any]):
+        """Logs valid-looking setups that were rejected by rules."""
         try:
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
                 cursor.execute("""
-                    INSERT INTO signals (symbol, type, reason, price)
-                    VALUES (?, ?, ?, ?)
-                """, (symbol, signal_type, reason, price))
+                    INSERT INTO skipped_setups (symbol, strategy, reason_skipped, confluence_score, market_context)
+                    VALUES (?, ?, ?, ?, ?)
+                """, (
+                    setup_data.get('symbol'),
+                    setup_data.get('strategy'),
+                    setup_data.get('reason'),
+                    setup_data.get('score'),
+                    setup_data.get('context')
+                ))
                 conn.commit()
         except Exception as e:
-            logger.error(f"Error logging signal to DB: {e}")
+            logger.error(f"Error logging skipped setup to DB: {e}")
 
     def log_equity(self, balance: float, equity: float):
-        """Logs a snapshot of the account balance and equity."""
         try:
-            # We only log if the value has changed significantly or every hour
-            # (To keep the DB small)
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
-                cursor.execute("""
-                    INSERT INTO equity_history (balance, equity)
-                    VALUES (?, ?)
-                """, (balance, equity))
+                cursor.execute("INSERT INTO equity_history (balance, equity) VALUES (?, ?)", (balance, equity))
                 conn.commit()
         except Exception as e:
-            logger.error(f"Error logging equity to DB: {e}")
-
-    def get_equity_data(self) -> List[Dict[str, Any]]:
-        """Retrieves equity history for charting."""
-        try:
-            with sqlite3.connect(self.db_path) as conn:
-                conn.row_factory = sqlite3.Row
-                cursor = conn.cursor()
-                cursor.execute("SELECT timestamp, balance, equity FROM equity_history ORDER BY timestamp ASC")
-                return [dict(row) for row in cursor.fetchall()]
-        except Exception as e:
-            logger.error(f"Error fetching equity data: {e}")
-            return []
+            logger.error(f"Error logging equity: {e}")

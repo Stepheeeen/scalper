@@ -22914,3 +22914,999 @@
 [23:57:51] | INFO | Final Balance:     $9869.82
 [23:57:51] | INFO | ==============================
 
+[00:15:39] | INFO | 🎬 *Starting Historical Playback*
+[00:15:39] | INFO | Starting Backtest...
+[00:15:40] | INFO | Risk: $100.00 | SL Dist: 0.77 | Calculated Lots: 1.29
+[00:15:40] | INFO | BACKTEST: Opened SELL at 2000.8465810262092
+[00:15:40] | INFO | BACKTEST: Closed SL at 2000.8465810262092 | PnL: $0.00
+[00:15:40] | INFO | Risk: $100.00 | SL Dist: 1.35 | Calculated Lots: 0.74
+[00:15:40] | INFO | BACKTEST: Opened SELL at 2000.969797701688
+[00:15:40] | INFO | BACKTEST: Closed Reverse Cross at 2001.413383064686 | PnL: $-32.83
+[00:15:40] | INFO | Risk: $99.67 | SL Dist: 0.77 | Calculated Lots: 1.3
+[00:15:40] | INFO | BACKTEST: Opened SELL at 2001.2855600971227
+[00:15:40] | INFO | BACKTEST: Closed SL at 2001.2855600971227 | PnL: $0.00
+[00:15:40] | INFO | Risk: $99.67 | SL Dist: 1.37 | Calculated Lots: 0.73
+[00:15:40] | INFO | BACKTEST: Opened SELL at 2001.8905030695137
+[00:15:40] | INFO | BACKTEST: Closed SL at 2001.8905030695137 | PnL: $0.00
+[00:15:40] | INFO | Risk: $99.67 | SL Dist: 1.31 | Calculated Lots: 0.76
+[00:15:40] | INFO | BACKTEST: Opened SELL at 2000.6628499764145
+[00:15:40] | INFO | BACKTEST: Closed SL at 2000.6628499764145 | PnL: $0.00
+[00:15:40] | INFO | Risk: $99.67 | SL Dist: 1.06 | Calculated Lots: 0.94
+[00:15:40] | INFO | BACKTEST: Opened SELL at 2000.6837994588648
+[00:15:40] | INFO | BACKTEST: Closed Reverse Cross at 2001.2509182964648 | PnL: $-53.31
+[00:15:40] | INFO | Risk: $99.14 | SL Dist: 0.73 | Calculated Lots: 1.36
+[00:15:40] | INFO | BACKTEST: Opened SELL at 2000.856245038462
+[00:15:40] | INFO | BACKTEST: Closed SL at 2000.856245038462 | PnL: $0.00
+[00:15:40] | INFO | Risk: $99.14 | SL Dist: 1.49 | Calculated Lots: 0.66
+[00:15:40] | INFO | BACKTEST: Opened SELL at 1997.921418192956
+[00:15:40] | INFO | BACKTEST: Closed Reverse Cross at 1998.6349722112525 | PnL: $-47.09
+[00:15:40] | INFO | Risk: $98.67 | SL Dist: 1.12 | Calculated Lots: 0.88
+[00:15:40] | INFO | BACKTEST: Opened BUY at 1998.6349722112525
+[00:15:40] | INFO | BACKTEST: Closed SL at 1998.6349722112525 | PnL: $0.00
+[00:15:40] | INFO | Risk: $98.67 | SL Dist: 0.55 | Calculated Lots: 1.8
+[00:15:40] | INFO | BACKTEST: Opened BUY at 1998.529085216936
+[00:15:40] | INFO | BACKTEST: Closed Reverse Cross at 1998.3446521521005 | PnL: $-33.20
+[00:15:40] | INFO | Risk: $98.34 | SL Dist: 0.54 | Calculated Lots: 1.83
+[00:15:40] | INFO | BACKTEST: Opened BUY at 1998.5185733361216
+[00:15:40] | INFO | BACKTEST: Closed TP at 1999.3248609903678 | PnL: $147.55
+[00:15:41] | INFO | Risk: $99.81 | SL Dist: 0.80 | Calculated Lots: 1.25
+[00:15:41] | INFO | BACKTEST: Opened SELL at 1998.54226100458
+[00:15:41] | INFO | BACKTEST: Closed SL at 1998.54226100458 | PnL: $0.00
+[00:15:41] | INFO | Risk: $99.81 | SL Dist: 0.83 | Calculated Lots: 1.2
+[00:15:41] | INFO | BACKTEST: Opened SELL at 1998.2650742207013
+[00:15:41] | INFO | BACKTEST: Closed SL at 1998.2650742207013 | PnL: $0.00
+[00:15:41] | INFO | Risk: $99.81 | SL Dist: 0.87 | Calculated Lots: 1.15
+[00:15:41] | INFO | BACKTEST: Opened SELL at 1997.870694662118
+[00:15:41] | INFO | BACKTEST: Closed TP at 1996.5713484833077 | PnL: $149.42
+[00:15:41] | INFO | Risk: $101.31 | SL Dist: 0.75 | Calculated Lots: 1.36
+[00:15:41] | INFO | BACKTEST: Opened SELL at 1998.547513603764
+[00:15:41] | INFO | BACKTEST: Closed Reverse Cross at 1998.7986648288784 | PnL: $-34.16
+[00:15:41] | INFO | Risk: $100.96 | SL Dist: 0.67 | Calculated Lots: 1.5
+[00:15:41] | INFO | BACKTEST: Opened SELL at 1998.619743368435
+[00:15:41] | INFO | BACKTEST: Closed SL at 1998.619743368435 | PnL: $0.00
+[00:15:41] | INFO | Risk: $100.96 | SL Dist: 1.36 | Calculated Lots: 0.74
+[00:15:41] | INFO | BACKTEST: Opened SELL at 1999.217478383542
+[00:15:41] | INFO | BACKTEST: Closed Reverse Cross at 1999.5716151001595 | PnL: $-26.21
+[00:15:41] | INFO | Risk: $100.70 | SL Dist: 0.85 | Calculated Lots: 1.19
+[00:15:41] | INFO | BACKTEST: Opened BUY at 2004.2435048758975
+[00:15:41] | INFO | BACKTEST: Closed SL at 2004.2435048758975 | PnL: $0.00
+[00:15:41] | INFO | Risk: $100.70 | SL Dist: 1.17 | Calculated Lots: 0.86
+[00:15:41] | INFO | BACKTEST: Opened BUY at 2004.3312089883648
+[00:15:41] | INFO | BACKTEST: Closed TP at 2006.0875361807075 | PnL: $151.04
+[00:15:42] | INFO | Risk: $102.21 | SL Dist: 1.03 | Calculated Lots: 0.99
+[00:15:42] | INFO | BACKTEST: Opened BUY at 2006.6879697459397
+[00:15:42] | INFO | BACKTEST: Closed SL at 2006.6879697459397 | PnL: $0.00
+[00:15:42] | INFO | Risk: $102.21 | SL Dist: 1.50 | Calculated Lots: 0.68
+[00:15:42] | INFO | BACKTEST: Opened BUY at 2009.5802088014905
+[00:15:42] | INFO | BACKTEST: Closed Reverse Cross at 2009.0153613818136 | PnL: $-38.41
+[00:15:42] | INFO | Risk: $101.83 | SL Dist: 1.39 | Calculated Lots: 0.73
+[00:15:42] | INFO | BACKTEST: Opened BUY at 2009.473549896332
+[00:15:42] | INFO | BACKTEST: Closed Reverse Cross at 2008.866555653588 | PnL: $-44.31
+[00:15:42] | INFO | Risk: $101.39 | SL Dist: 1.14 | Calculated Lots: 0.89
+[00:15:42] | INFO | BACKTEST: Opened BUY at 2009.5590202212572
+[00:15:42] | INFO | BACKTEST: Closed SL at 2009.5590202212572 | PnL: $0.00
+[00:15:42] | INFO | Risk: $101.39 | SL Dist: 0.91 | Calculated Lots: 1.11
+[00:15:42] | INFO | BACKTEST: Opened BUY at 2009.3019050552864
+[00:15:42] | INFO | BACKTEST: Closed Reverse Cross at 2009.1615067177247 | PnL: $-15.58
+[00:15:42] | INFO | Risk: $101.23 | SL Dist: 0.76 | Calculated Lots: 1.34
+[00:15:42] | INFO | BACKTEST: Opened BUY at 2009.071089999931
+[00:15:42] | INFO | BACKTEST: Closed TP at 2010.2060985918733 | PnL: $152.09
+[00:15:42] | INFO | Risk: $102.75 | SL Dist: 0.86 | Calculated Lots: 1.2
+[00:15:42] | INFO | BACKTEST: Opened BUY at 2009.7327914341872
+[00:15:42] | INFO | BACKTEST: Closed SL at 2009.7327914341872 | PnL: $0.00
+[00:15:42] | INFO | Risk: $102.75 | SL Dist: 0.96 | Calculated Lots: 1.07
+[00:15:42] | INFO | BACKTEST: Opened BUY at 2009.633931413599
+[00:15:42] | INFO | BACKTEST: Closed SL at 2009.633931413599 | PnL: $0.00
+[00:15:42] | INFO | Risk: $102.75 | SL Dist: 1.12 | Calculated Lots: 0.92
+[00:15:42] | INFO | BACKTEST: Opened BUY at 2009.8812726384783
+[00:15:42] | INFO | BACKTEST: Closed SL at 2009.8812726384783 | PnL: $0.00
+[00:15:42] | INFO | Risk: $102.75 | SL Dist: 0.56 | Calculated Lots: 1.84
+[00:15:42] | INFO | BACKTEST: Opened BUY at 2010.3019994616288
+[00:15:42] | INFO | BACKTEST: Closed Reverse Cross at 2009.91980103132 | PnL: $-70.32
+[00:15:42] | INFO | Risk: $102.05 | SL Dist: 1.37 | Calculated Lots: 0.75
+[00:15:42] | INFO | BACKTEST: Opened BUY at 2010.3865224288352
+[00:15:42] | INFO | BACKTEST: Closed SL at 2010.3865224288352 | PnL: $0.00
+[00:15:43] | INFO | Risk: $102.05 | SL Dist: 1.27 | Calculated Lots: 0.8
+[00:15:43] | INFO | BACKTEST: Opened SELL at 2012.4500859343511
+[00:15:43] | INFO | BACKTEST: Closed Reverse Cross at 2013.0279317239 | PnL: $-46.23
+[00:15:43] | INFO | Risk: $101.58 | SL Dist: 1.29 | Calculated Lots: 0.79
+[00:15:43] | INFO | BACKTEST: Opened SELL at 2014.915831322067
+[00:15:43] | INFO | BACKTEST: Closed SL at 2014.915831322067 | PnL: $0.00
+[00:15:43] | INFO | Risk: $101.58 | SL Dist: 0.53 | Calculated Lots: 1.93
+[00:15:43] | INFO | BACKTEST: Opened SELL at 2014.5868696232928
+[00:15:43] | INFO | BACKTEST: Closed SL at 2014.5868696232928 | PnL: $0.00
+[00:15:43] | INFO | Risk: $101.58 | SL Dist: 1.05 | Calculated Lots: 0.96
+[00:15:43] | INFO | BACKTEST: Opened SELL at 2014.077501157408
+[00:15:43] | INFO | BACKTEST: Closed SL at 2014.077501157408 | PnL: $0.00
+[00:15:43] | INFO | Risk: $101.58 | SL Dist: 0.61 | Calculated Lots: 1.66
+[00:15:43] | INFO | BACKTEST: Opened BUY at 2017.454009720393
+[00:15:43] | INFO | BACKTEST: Closed SL at 2017.454009720393 | PnL: $0.00
+[00:15:43] | INFO | Risk: $101.58 | SL Dist: 0.58 | Calculated Lots: 1.74
+[00:15:43] | INFO | BACKTEST: Opened BUY at 2017.6793730214404
+[00:15:43] | INFO | BACKTEST: Closed TP at 2018.5529949085608 | PnL: $152.01
+[00:15:43] | INFO | Risk: $103.10 | SL Dist: 0.63 | Calculated Lots: 1.65
+[00:15:43] | INFO | BACKTEST: Opened SELL at 2016.100714583681
+[00:15:43] | INFO | BACKTEST: Closed SL at 2016.100714583681 | PnL: $0.00
+[00:15:43] | INFO | Risk: $103.10 | SL Dist: 0.93 | Calculated Lots: 1.11
+[00:15:43] | INFO | BACKTEST: Opened BUY at 2016.115901711147
+[00:15:43] | INFO | BACKTEST: Closed SL at 2016.115901711147 | PnL: $0.00
+[00:15:43] | INFO | Risk: $103.10 | SL Dist: 0.71 | Calculated Lots: 1.45
+[00:15:43] | INFO | BACKTEST: Opened BUY at 2016.4164814104895
+[00:15:44] | INFO | BACKTEST: Closed SL at 2016.4164814104895 | PnL: $0.00
+[00:15:44] | INFO | Risk: $103.10 | SL Dist: 0.83 | Calculated Lots: 1.24
+[00:15:44] | INFO | BACKTEST: Opened SELL at 2016.04347854084
+[00:15:44] | INFO | BACKTEST: Closed Reverse Cross at 2016.5595654321687 | PnL: $-63.99
+[00:15:44] | INFO | Risk: $102.46 | SL Dist: 0.68 | Calculated Lots: 1.5
+[00:15:44] | INFO | BACKTEST: Opened SELL at 2016.1942028059625
+[00:15:44] | INFO | BACKTEST: Closed SL at 2016.1942028059625 | PnL: $0.00
+[00:15:44] | INFO | Risk: $102.46 | SL Dist: 0.98 | Calculated Lots: 1.04
+[00:15:44] | INFO | BACKTEST: Opened SELL at 2015.9718620618517
+[00:15:44] | INFO | BACKTEST: Closed SL at 2016.954281630236 | PnL: $-102.17
+[00:15:44] | INFO | Risk: $101.44 | SL Dist: 0.89 | Calculated Lots: 1.14
+[00:15:44] | INFO | BACKTEST: Opened SELL at 2016.236891484691
+[00:15:44] | INFO | BACKTEST: Closed SL at 2016.236891484691 | PnL: $0.00
+[00:15:44] | INFO | Risk: $101.44 | SL Dist: 0.89 | Calculated Lots: 1.14
+[00:15:44] | INFO | BACKTEST: Opened SELL at 2016.1276364197224
+[00:15:44] | INFO | BACKTEST: Closed Reverse Cross at 2016.402524038357 | PnL: $-31.34
+[00:15:44] | INFO | Risk: $101.13 | SL Dist: 1.05 | Calculated Lots: 0.97
+[00:15:44] | INFO | BACKTEST: Opened SELL at 2015.975389195561
+[00:15:44] | INFO | BACKTEST: Closed Reverse Cross at 2016.602938902293 | PnL: $-60.87
+[00:15:44] | INFO | Risk: $100.52 | SL Dist: 0.97 | Calculated Lots: 1.03
+[00:15:44] | INFO | BACKTEST: Opened SELL at 2016.7501646219728
+[00:15:44] | INFO | BACKTEST: Closed Reverse Cross at 2017.215885409544 | PnL: $-47.97
+[00:15:44] | INFO | Risk: $100.04 | SL Dist: 1.39 | Calculated Lots: 0.72
+[00:15:44] | INFO | BACKTEST: Opened SELL at 2017.27092000164
+[00:15:44] | INFO | BACKTEST: Closed SL at 2017.27092000164 | PnL: $0.00
+[00:15:44] | INFO | Risk: $100.04 | SL Dist: 1.16 | Calculated Lots: 0.87
+[00:15:44] | INFO | BACKTEST: Opened BUY at 2016.6110277504715
+[00:15:44] | INFO | BACKTEST: Closed SL at 2016.6110277504715 | PnL: $0.00
+[00:15:44] | INFO | Risk: $100.04 | SL Dist: 0.97 | Calculated Lots: 1.03
+[00:15:44] | INFO | BACKTEST: Opened SELL at 2015.56960174176
+[00:15:44] | INFO | BACKTEST: Closed SL at 2015.56960174176 | PnL: $0.00
+[00:15:44] | INFO | Risk: $100.04 | SL Dist: 1.04 | Calculated Lots: 0.96
+[00:15:44] | INFO | BACKTEST: Opened SELL at 2015.2290148744528
+[00:15:44] | INFO | BACKTEST: Closed Reverse Cross at 2015.4709453417304 | PnL: $-23.23
+[00:15:44] | INFO | Risk: $99.81 | SL Dist: 0.87 | Calculated Lots: 1.14
+[00:15:44] | INFO | BACKTEST: Opened SELL at 2015.3039167614045
+[00:15:44] | INFO | BACKTEST: Closed Reverse Cross at 2015.721824505744 | PnL: $-47.64
+[00:15:44] | INFO | Risk: $99.33 | SL Dist: 1.01 | Calculated Lots: 0.98
+[00:15:44] | INFO | BACKTEST: Opened SELL at 2015.412659673474
+[00:15:44] | INFO | BACKTEST: Closed SL at 2015.412659673474 | PnL: $0.00
+[00:15:44] | INFO | Risk: $99.33 | SL Dist: 1.03 | Calculated Lots: 0.97
+[00:15:44] | INFO | BACKTEST: Opened BUY at 2016.1503374645208
+[00:15:45] | INFO | BACKTEST: Closed Reverse Cross at 2015.698159231709 | PnL: $-43.86
+[00:15:45] | INFO | Risk: $98.89 | SL Dist: 0.49 | Calculated Lots: 2.04
+[00:15:45] | INFO | BACKTEST: Opened BUY at 2015.8824892540936
+[00:15:45] | INFO | BACKTEST: Closed SL at 2015.3965437547265 | PnL: $-99.13
+[00:15:45] | INFO | Risk: $97.90 | SL Dist: 0.84 | Calculated Lots: 1.16
+[00:15:45] | INFO | BACKTEST: Opened SELL at 2017.4953367279893
+[00:15:45] | INFO | BACKTEST: Closed Reverse Cross at 2017.891018449113 | PnL: $-45.90
+[00:15:45] | INFO | Risk: $97.44 | SL Dist: 0.87 | Calculated Lots: 1.12
+[00:15:45] | INFO | BACKTEST: Opened SELL at 2017.5246115545365
+[00:15:45] | INFO | BACKTEST: Closed SL at 2017.5246115545365 | PnL: $0.00
+[00:15:45] | INFO | Risk: $97.44 | SL Dist: 1.03 | Calculated Lots: 0.95
+[00:15:45] | INFO | BACKTEST: Opened SELL at 2015.625610969232
+[00:15:45] | INFO | BACKTEST: Closed Reverse Cross at 2015.9755277500728 | PnL: $-33.24
+[00:15:45] | INFO | Risk: $97.11 | SL Dist: 0.81 | Calculated Lots: 1.19
+[00:15:45] | INFO | BACKTEST: Opened SELL at 2015.8005119989537
+[00:15:45] | INFO | BACKTEST: Closed SL at 2015.8005119989537 | PnL: $0.00
+[00:15:45] | INFO | Risk: $97.11 | SL Dist: 0.92 | Calculated Lots: 1.06
+[00:15:45] | INFO | BACKTEST: Opened SELL at 2016.56761645044
+[00:15:45] | INFO | BACKTEST: Closed Reverse Cross at 2016.8820225279865 | PnL: $-33.33
+[00:15:45] | INFO | Risk: $96.78 | SL Dist: 0.81 | Calculated Lots: 1.2
+[00:15:45] | INFO | BACKTEST: Opened SELL at 2016.6189608246912
+[00:15:45] | INFO | BACKTEST: Closed SL at 2017.426308469513 | PnL: $-96.88
+[00:15:45] | INFO | Risk: $95.81 | SL Dist: 0.93 | Calculated Lots: 1.03
+[00:15:45] | INFO | BACKTEST: Opened SELL at 2016.7554645949076
+[00:15:45] | INFO | BACKTEST: Closed SL at 2016.7554645949076 | PnL: $0.00
+[00:15:45] | INFO | Risk: $95.81 | SL Dist: 0.84 | Calculated Lots: 1.14
+[00:15:45] | INFO | BACKTEST: Opened SELL at 2017.3408904059413
+[00:15:45] | INFO | BACKTEST: Closed SL at 2017.3408904059413 | PnL: $0.00
+[00:15:45] | INFO | Risk: $95.81 | SL Dist: 0.73 | Calculated Lots: 1.31
+[00:15:45] | INFO | BACKTEST: Opened SELL at 2017.4192473995213
+[00:15:45] | INFO | BACKTEST: Closed Reverse Cross at 2018.0412126131812 | PnL: $-81.48
+[00:15:45] | INFO | Risk: $94.99 | SL Dist: 0.98 | Calculated Lots: 0.97
+[00:15:45] | INFO | BACKTEST: Opened SELL at 2017.2062646673005
+[00:15:45] | INFO | BACKTEST: Closed SL at 2017.2062646673005 | PnL: $0.00
+[00:15:46] | INFO | Risk: $94.99 | SL Dist: 0.81 | Calculated Lots: 1.17
+[00:15:46] | INFO | BACKTEST: Opened SELL at 2017.586260731933
+[00:15:46] | INFO | BACKTEST: Closed SL at 2017.586260731933 | PnL: $0.00
+[00:15:46] | INFO | Risk: $94.99 | SL Dist: 1.00 | Calculated Lots: 0.95
+[00:15:46] | INFO | BACKTEST: Opened BUY at 2017.3297518007985
+[00:15:46] | INFO | BACKTEST: Closed SL at 2017.3297518007985 | PnL: $0.00
+[00:15:46] | INFO | Risk: $94.99 | SL Dist: 1.11 | Calculated Lots: 0.86
+[00:15:46] | INFO | BACKTEST: Opened BUY at 2018.741717445688
+[00:15:46] | INFO | BACKTEST: Closed SL at 2018.741717445688 | PnL: $0.00
+[00:15:46] | INFO | Risk: $94.99 | SL Dist: 1.04 | Calculated Lots: 0.91
+[00:15:46] | INFO | BACKTEST: Opened BUY at 2018.059015808952
+[00:15:46] | INFO | BACKTEST: Closed TP at 2019.6228919789173 | PnL: $142.31
+[00:15:46] | INFO | Risk: $96.42 | SL Dist: 1.18 | Calculated Lots: 0.82
+[00:15:46] | INFO | BACKTEST: Opened BUY at 2019.9038112491835
+[00:15:46] | INFO | BACKTEST: Closed SL at 2019.9038112491835 | PnL: $0.00
+[00:15:46] | INFO | Risk: $96.42 | SL Dist: 0.82 | Calculated Lots: 1.18
+[00:15:46] | INFO | BACKTEST: Opened BUY at 2019.9199738903749
+[00:15:46] | INFO | BACKTEST: Closed SL at 2019.9199738903749 | PnL: $0.00
+[00:15:46] | INFO | Risk: $96.42 | SL Dist: 1.47 | Calculated Lots: 0.66
+[00:15:46] | INFO | BACKTEST: Opened BUY at 2018.3593103198432
+[00:15:46] | INFO | BACKTEST: Closed Reverse Cross at 2017.913861026236 | PnL: $-29.40
+[00:15:46] | INFO | Risk: $96.12 | SL Dist: 0.93 | Calculated Lots: 1.04
+[00:15:46] | INFO | BACKTEST: Opened BUY at 2018.3929915182264
+[00:15:46] | INFO | BACKTEST: Closed SL at 2018.3929915182264 | PnL: $0.00
+[00:15:46] | INFO | Risk: $96.12 | SL Dist: 1.09 | Calculated Lots: 0.88
+[00:15:46] | INFO | BACKTEST: Opened BUY at 2019.3581749988252
+[00:15:46] | INFO | BACKTEST: Closed SL at 2019.3581749988252 | PnL: $0.00
+[00:15:46] | INFO | Risk: $96.12 | SL Dist: 1.10 | Calculated Lots: 0.88
+[00:15:46] | INFO | BACKTEST: Opened BUY at 2018.954584808622
+[00:15:46] | INFO | BACKTEST: Closed SL at 2018.954584808622 | PnL: $0.00
+[00:15:46] | INFO | Risk: $96.12 | SL Dist: 0.58 | Calculated Lots: 1.64
+[00:15:46] | INFO | BACKTEST: Opened BUY at 2019.14073919378
+[00:15:47] | INFO | BACKTEST: Closed TP at 2020.017455023416 | PnL: $143.78
+[00:15:47] | INFO | Risk: $97.56 | SL Dist: 1.07 | Calculated Lots: 0.91
+[00:15:47] | INFO | BACKTEST: Opened BUY at 2016.378570225761
+[00:15:47] | INFO | BACKTEST: Closed SL at 2016.378570225761 | PnL: $0.00
+[00:15:47] | INFO | Risk: $97.56 | SL Dist: 0.97 | Calculated Lots: 1.01
+[00:15:47] | INFO | BACKTEST: Opened BUY at 2016.9933641208545
+[00:15:47] | INFO | BACKTEST: Closed SL at 2016.9933641208545 | PnL: $0.00
+[00:15:47] | INFO | Risk: $97.56 | SL Dist: 0.88 | Calculated Lots: 1.11
+[00:15:47] | INFO | BACKTEST: Opened SELL at 2016.5803746430156
+[00:15:47] | INFO | BACKTEST: Closed SL at 2016.5803746430156 | PnL: $0.00
+[00:16:01] | INFO | 
+================================================================================
+[00:16:01] | INFO | Time                 | Side | Entry    | Exit     | PnL ($)    | Result
+[00:16:01] | INFO | --------------------------------------------------------------------------------
+[00:16:01] | INFO | 2026-02-17 03:21:28.474966 | SELL | 2000.85  | 2000.85  | 0.00       | ❌
+[00:16:01] | INFO | 2026-02-17 04:05:28.474966 | SELL | 2000.97  | 2001.41  | -32.83     | ❌
+[00:16:01] | INFO | 2026-02-17 04:24:28.474966 | SELL | 2001.29  | 2001.29  | 0.00       | ❌
+[00:16:01] | INFO | 2026-02-17 05:02:28.474966 | SELL | 2001.89  | 2001.89  | 0.00       | ❌
+[00:16:01] | INFO | 2026-02-17 05:45:28.474966 | SELL | 2000.66  | 2000.66  | 0.00       | ❌
+[00:16:01] | INFO | 2026-02-17 05:59:28.474966 | SELL | 2000.68  | 2001.25  | -53.31     | ❌
+[00:16:01] | INFO | 2026-02-17 06:05:28.474966 | SELL | 2000.86  | 2000.86  | 0.00       | ❌
+[00:16:01] | INFO | 2026-02-17 07:08:28.474966 | SELL | 1997.92  | 1998.63  | -47.09     | ❌
+[00:16:01] | INFO | 2026-02-17 07:23:28.474966 | BUY  | 1998.63  | 1998.63  | 0.00       | ❌
+[00:16:01] | INFO | 2026-02-17 07:40:28.474966 | BUY  | 1998.53  | 1998.34  | -33.20     | ❌
+[00:16:01] | INFO | 2026-02-17 07:42:28.474966 | BUY  | 1998.52  | 1999.32  | 147.55     | ✅
+[00:16:01] | INFO | 2026-02-17 09:23:28.474966 | SELL | 1998.54  | 1998.54  | 0.00       | ❌
+[00:16:01] | INFO | 2026-02-17 09:41:28.474966 | SELL | 1998.27  | 1998.27  | 0.00       | ❌
+[00:16:01] | INFO | 2026-02-17 10:02:28.474966 | SELL | 1997.87  | 1996.57  | 149.42     | ✅
+[00:16:01] | INFO | 2026-02-17 11:07:28.474966 | SELL | 1998.55  | 1998.80  | -34.16     | ❌
+[00:16:01] | INFO | 2026-02-17 11:09:28.474966 | SELL | 1998.62  | 1998.62  | 0.00       | ❌
+[00:16:01] | INFO | 2026-02-17 11:34:28.474966 | SELL | 1999.22  | 1999.57  | -26.21     | ❌
+[00:16:01] | INFO | 2026-02-17 13:37:28.474966 | BUY  | 2004.24  | 2004.24  | 0.00       | ❌
+[00:16:01] | INFO | 2026-02-17 14:21:28.474966 | BUY  | 2004.33  | 2006.09  | 151.04     | ✅
+[00:16:01] | INFO | 2026-02-17 15:44:28.474966 | BUY  | 2006.69  | 2006.69  | 0.00       | ❌
+[00:16:01] | INFO | 2026-02-17 16:58:28.474966 | BUY  | 2009.58  | 2009.02  | -38.41     | ❌
+[00:16:02] | INFO | 2026-02-17 17:01:28.474966 | BUY  | 2009.47  | 2008.87  | -44.31     | ❌
+[00:16:02] | INFO | 2026-02-17 17:05:28.474966 | BUY  | 2009.56  | 2009.56  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-17 17:45:28.474966 | BUY  | 2009.30  | 2009.16  | -15.58     | ❌
+[00:16:02] | INFO | 2026-02-17 18:02:28.474966 | BUY  | 2009.07  | 2010.21  | 152.09     | ✅
+[00:16:02] | INFO | 2026-02-17 18:41:28.474966 | BUY  | 2009.73  | 2009.73  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-17 18:55:28.474966 | BUY  | 2009.63  | 2009.63  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-17 19:15:28.474966 | BUY  | 2009.88  | 2009.88  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-17 19:43:28.474966 | BUY  | 2010.30  | 2009.92  | -70.32     | ❌
+[00:16:02] | INFO | 2026-02-17 19:53:28.474966 | BUY  | 2010.39  | 2010.39  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-17 22:28:28.474966 | SELL | 2012.45  | 2013.03  | -46.23     | ❌
+[00:16:02] | INFO | 2026-02-17 23:16:28.474966 | SELL | 2014.92  | 2014.92  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-17 23:32:28.474966 | SELL | 2014.59  | 2014.59  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-17 23:42:28.474966 | SELL | 2014.08  | 2014.08  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 02:39:28.474966 | BUY  | 2017.45  | 2017.45  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 02:57:28.474966 | BUY  | 2017.68  | 2018.55  | 152.01     | ✅
+[00:16:02] | INFO | 2026-02-18 04:17:28.474966 | SELL | 2016.10  | 2016.10  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 04:34:28.474966 | BUY  | 2016.12  | 2016.12  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 04:54:28.474966 | BUY  | 2016.42  | 2016.42  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 04:59:28.474966 | SELL | 2016.04  | 2016.56  | -63.99     | ❌
+[00:16:02] | INFO | 2026-02-18 05:03:28.474966 | SELL | 2016.19  | 2016.19  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 05:28:28.474966 | SELL | 2015.97  | 2016.95  | -102.17    | ❌
+[00:16:02] | INFO | 2026-02-18 05:38:28.474966 | SELL | 2016.24  | 2016.24  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 06:14:28.474966 | SELL | 2016.13  | 2016.40  | -31.34     | ❌
+[00:16:02] | INFO | 2026-02-18 06:16:28.474966 | SELL | 2015.98  | 2016.60  | -60.87     | ❌
+[00:16:02] | INFO | 2026-02-18 06:42:28.474966 | SELL | 2016.75  | 2017.22  | -47.97     | ❌
+[00:16:02] | INFO | 2026-02-18 07:04:28.474966 | SELL | 2017.27  | 2017.27  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 08:11:28.474966 | BUY  | 2016.61  | 2016.61  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 09:27:28.474966 | SELL | 2015.57  | 2015.57  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 09:48:28.474966 | SELL | 2015.23  | 2015.47  | -23.23     | ❌
+[00:16:02] | INFO | 2026-02-18 09:54:28.474966 | SELL | 2015.30  | 2015.72  | -47.64     | ❌
+[00:16:02] | INFO | 2026-02-18 10:08:28.474966 | SELL | 2015.41  | 2015.41  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 11:02:28.474966 | BUY  | 2016.15  | 2015.70  | -43.86     | ❌
+[00:16:02] | INFO | 2026-02-18 11:09:28.474966 | BUY  | 2015.88  | 2015.40  | -99.13     | ❌
+[00:16:02] | INFO | 2026-02-18 12:47:28.474966 | SELL | 2017.50  | 2017.89  | -45.90     | ❌
+[00:16:02] | INFO | 2026-02-18 13:00:28.474966 | SELL | 2017.52  | 2017.52  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 14:19:28.474966 | SELL | 2015.63  | 2015.98  | -33.24     | ❌
+[00:16:02] | INFO | 2026-02-18 14:29:28.474966 | SELL | 2015.80  | 2015.80  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 15:12:28.474966 | SELL | 2016.57  | 2016.88  | -33.33     | ❌
+[00:16:02] | INFO | 2026-02-18 15:25:28.474966 | SELL | 2016.62  | 2017.43  | -96.88     | ❌
+[00:16:02] | INFO | 2026-02-18 15:38:28.474966 | SELL | 2016.76  | 2016.76  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 16:01:28.474966 | SELL | 2017.34  | 2017.34  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 16:07:28.474966 | SELL | 2017.42  | 2018.04  | -81.48     | ❌
+[00:16:02] | INFO | 2026-02-18 16:16:28.474966 | SELL | 2017.21  | 2017.21  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 16:57:28.474966 | SELL | 2017.59  | 2017.59  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 17:20:28.474966 | BUY  | 2017.33  | 2017.33  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 17:53:28.474966 | BUY  | 2018.74  | 2018.74  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 18:36:28.474966 | BUY  | 2018.06  | 2019.62  | 142.31     | ✅
+[00:16:02] | INFO | 2026-02-18 20:35:28.474966 | BUY  | 2019.90  | 2019.90  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 20:45:28.474966 | BUY  | 2019.92  | 2019.92  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 21:59:28.474966 | BUY  | 2018.36  | 2017.91  | -29.40     | ❌
+[00:16:02] | INFO | 2026-02-18 22:15:28.474966 | BUY  | 2018.39  | 2018.39  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 22:55:28.474966 | BUY  | 2019.36  | 2019.36  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 23:20:28.474966 | BUY  | 2018.95  | 2018.95  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-18 23:29:28.474966 | BUY  | 2019.14  | 2020.02  | 143.78     | ✅
+[00:16:02] | INFO | 2026-02-19 00:52:28.474966 | BUY  | 2016.38  | 2016.38  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-19 01:17:28.474966 | BUY  | 2016.99  | 2016.99  | 0.00       | ❌
+[00:16:02] | INFO | 2026-02-19 02:01:28.474966 | SELL | 2016.58  | 2016.58  | 0.00       | ❌
+[00:16:02] | INFO | ================================================================================
+
+[00:16:02] | INFO | 
+==============================
+[00:16:02] | INFO |    🚀 BACKTEST SUMMARY 🚀   
+[00:16:02] | INFO | ==============================
+[00:16:02] | INFO | Total Trades:      78
+[00:16:02] | INFO | Win Rate:          9.0%
+[00:16:02] | INFO | Profit Factor:     0.81
+[00:16:02] | INFO | Max Drawdown:      7.9%
+[00:16:02] | INFO | Total Net Profit:  $-243.86
+[00:16:02] | INFO | Final Balance:     $9756.14
+[00:16:02] | INFO | ==============================
+
+[00:16:09] | INFO | 🎬 *Starting Historical Playback*
+[00:16:09] | INFO | Starting Backtest...
+[00:16:09] | INFO | Risk: $100.00 | SL Dist: 0.77 | Calculated Lots: 1.29
+[00:16:09] | INFO | BACKTEST: Opened SELL at 2000.8465810262092
+[00:16:09] | INFO | BACKTEST: Closed SL at 2000.8465810262092 | PnL: $0.00
+[00:16:09] | INFO | Risk: $100.00 | SL Dist: 1.35 | Calculated Lots: 0.74
+[00:16:09] | INFO | BACKTEST: Opened SELL at 2000.969797701688
+[00:16:09] | INFO | BACKTEST: Closed Reverse Cross at 2001.413383064686 | PnL: $-32.83
+[00:16:09] | INFO | Risk: $99.67 | SL Dist: 0.77 | Calculated Lots: 1.3
+[00:16:09] | INFO | BACKTEST: Opened SELL at 2001.2855600971227
+[00:16:09] | INFO | BACKTEST: Closed SL at 2001.2855600971227 | PnL: $0.00
+[00:16:09] | INFO | Risk: $99.67 | SL Dist: 1.37 | Calculated Lots: 0.73
+[00:16:09] | INFO | BACKTEST: Opened SELL at 2001.8905030695137
+[00:16:09] | INFO | BACKTEST: Closed SL at 2001.8905030695137 | PnL: $0.00
+[00:16:10] | INFO | Risk: $99.67 | SL Dist: 1.31 | Calculated Lots: 0.76
+[00:16:10] | INFO | BACKTEST: Opened SELL at 2000.6628499764145
+[00:16:10] | INFO | BACKTEST: Closed SL at 2000.6628499764145 | PnL: $0.00
+[00:16:10] | INFO | Risk: $99.67 | SL Dist: 1.06 | Calculated Lots: 0.94
+[00:16:10] | INFO | BACKTEST: Opened SELL at 2000.6837994588648
+[00:16:10] | INFO | BACKTEST: Closed Reverse Cross at 2001.2509182964648 | PnL: $-53.31
+[00:16:10] | INFO | Risk: $99.14 | SL Dist: 0.73 | Calculated Lots: 1.36
+[00:16:10] | INFO | BACKTEST: Opened SELL at 2000.856245038462
+[00:16:10] | INFO | BACKTEST: Closed SL at 2000.856245038462 | PnL: $0.00
+[00:16:10] | INFO | Risk: $99.14 | SL Dist: 1.49 | Calculated Lots: 0.66
+[00:16:10] | INFO | BACKTEST: Opened SELL at 1997.921418192956
+[00:16:10] | INFO | BACKTEST: Closed Reverse Cross at 1998.6349722112525 | PnL: $-47.09
+[00:16:10] | INFO | Risk: $98.67 | SL Dist: 1.12 | Calculated Lots: 0.88
+[00:16:10] | INFO | BACKTEST: Opened BUY at 1998.6349722112525
+[00:16:10] | INFO | BACKTEST: Closed SL at 1998.6349722112525 | PnL: $0.00
+[00:16:10] | INFO | Risk: $98.67 | SL Dist: 0.55 | Calculated Lots: 1.8
+[00:16:10] | INFO | BACKTEST: Opened BUY at 1998.529085216936
+[00:16:10] | INFO | BACKTEST: Closed Reverse Cross at 1998.3446521521005 | PnL: $-33.20
+[00:16:10] | INFO | Risk: $98.34 | SL Dist: 0.54 | Calculated Lots: 1.83
+[00:16:10] | INFO | BACKTEST: Opened BUY at 1998.5185733361216
+[00:16:10] | INFO | BACKTEST: Closed TP at 1999.3248609903678 | PnL: $147.55
+[00:16:10] | INFO | Risk: $99.81 | SL Dist: 0.80 | Calculated Lots: 1.25
+[00:16:10] | INFO | BACKTEST: Opened SELL at 1998.54226100458
+[00:16:10] | INFO | BACKTEST: Closed SL at 1998.54226100458 | PnL: $0.00
+[00:16:10] | INFO | Risk: $99.81 | SL Dist: 0.83 | Calculated Lots: 1.2
+[00:16:10] | INFO | BACKTEST: Opened SELL at 1998.2650742207013
+[00:16:10] | INFO | BACKTEST: Closed SL at 1998.2650742207013 | PnL: $0.00
+[00:16:10] | INFO | Risk: $99.81 | SL Dist: 0.87 | Calculated Lots: 1.15
+[00:16:10] | INFO | BACKTEST: Opened SELL at 1997.870694662118
+[00:16:10] | INFO | BACKTEST: Closed TP at 1996.5713484833077 | PnL: $149.42
+[00:16:10] | INFO | Risk: $101.31 | SL Dist: 0.75 | Calculated Lots: 1.36
+[00:16:10] | INFO | BACKTEST: Opened SELL at 1998.547513603764
+[00:16:10] | INFO | BACKTEST: Closed Reverse Cross at 1998.7986648288784 | PnL: $-34.16
+[00:16:10] | INFO | Risk: $100.96 | SL Dist: 0.67 | Calculated Lots: 1.5
+[00:16:10] | INFO | BACKTEST: Opened SELL at 1998.619743368435
+[00:16:10] | INFO | BACKTEST: Closed SL at 1998.619743368435 | PnL: $0.00
+[00:16:10] | INFO | Risk: $100.96 | SL Dist: 1.36 | Calculated Lots: 0.74
+[00:16:10] | INFO | BACKTEST: Opened SELL at 1999.217478383542
+[00:16:10] | INFO | BACKTEST: Closed Reverse Cross at 1999.5716151001595 | PnL: $-26.21
+[00:16:11] | INFO | Risk: $100.70 | SL Dist: 0.85 | Calculated Lots: 1.19
+[00:16:11] | INFO | BACKTEST: Opened BUY at 2004.2435048758975
+[00:16:11] | INFO | BACKTEST: Closed SL at 2004.2435048758975 | PnL: $0.00
+[00:16:11] | INFO | Risk: $100.70 | SL Dist: 1.17 | Calculated Lots: 0.86
+[00:16:11] | INFO | BACKTEST: Opened BUY at 2004.3312089883648
+[00:16:11] | INFO | BACKTEST: Closed TP at 2006.0875361807075 | PnL: $151.04
+[00:16:11] | INFO | Risk: $102.21 | SL Dist: 1.03 | Calculated Lots: 0.99
+[00:16:11] | INFO | BACKTEST: Opened BUY at 2006.6879697459397
+[00:16:11] | INFO | BACKTEST: Closed SL at 2006.6879697459397 | PnL: $0.00
+[00:16:11] | INFO | Risk: $102.21 | SL Dist: 1.50 | Calculated Lots: 0.68
+[00:16:11] | INFO | BACKTEST: Opened BUY at 2009.5802088014905
+[00:16:11] | INFO | BACKTEST: Closed Reverse Cross at 2009.0153613818136 | PnL: $-38.41
+[00:16:11] | INFO | Risk: $101.83 | SL Dist: 1.39 | Calculated Lots: 0.73
+[00:16:11] | INFO | BACKTEST: Opened BUY at 2009.473549896332
+[00:16:11] | INFO | BACKTEST: Closed Reverse Cross at 2008.866555653588 | PnL: $-44.31
+[00:16:11] | INFO | Risk: $101.39 | SL Dist: 1.14 | Calculated Lots: 0.89
+[00:16:11] | INFO | BACKTEST: Opened BUY at 2009.5590202212572
+[00:16:11] | INFO | BACKTEST: Closed SL at 2009.5590202212572 | PnL: $0.00
+[00:16:11] | INFO | Risk: $101.39 | SL Dist: 0.91 | Calculated Lots: 1.11
+[00:16:11] | INFO | BACKTEST: Opened BUY at 2009.3019050552864
+[00:16:11] | INFO | BACKTEST: Closed Reverse Cross at 2009.1615067177247 | PnL: $-15.58
+[00:16:11] | INFO | Risk: $101.23 | SL Dist: 0.76 | Calculated Lots: 1.34
+[00:16:11] | INFO | BACKTEST: Opened BUY at 2009.071089999931
+[00:16:11] | INFO | BACKTEST: Closed TP at 2010.2060985918733 | PnL: $152.09
+[00:16:11] | INFO | Risk: $102.75 | SL Dist: 0.86 | Calculated Lots: 1.2
+[00:16:11] | INFO | BACKTEST: Opened BUY at 2009.7327914341872
+[00:16:11] | INFO | BACKTEST: Closed SL at 2009.7327914341872 | PnL: $0.00
+[00:16:11] | INFO | Risk: $102.75 | SL Dist: 0.96 | Calculated Lots: 1.07
+[00:16:11] | INFO | BACKTEST: Opened BUY at 2009.633931413599
+[00:16:11] | INFO | BACKTEST: Closed SL at 2009.633931413599 | PnL: $0.00
+[00:16:11] | INFO | Risk: $102.75 | SL Dist: 1.12 | Calculated Lots: 0.92
+[00:16:11] | INFO | BACKTEST: Opened BUY at 2009.8812726384783
+[00:16:11] | INFO | BACKTEST: Closed SL at 2009.8812726384783 | PnL: $0.00
+[00:16:11] | INFO | Risk: $102.75 | SL Dist: 0.56 | Calculated Lots: 1.84
+[00:16:11] | INFO | BACKTEST: Opened BUY at 2010.3019994616288
+[00:16:12] | INFO | BACKTEST: Closed Reverse Cross at 2009.91980103132 | PnL: $-70.32
+[00:16:12] | INFO | Risk: $102.05 | SL Dist: 1.37 | Calculated Lots: 0.75
+[00:16:12] | INFO | BACKTEST: Opened BUY at 2010.3865224288352
+[00:16:12] | INFO | BACKTEST: Closed SL at 2010.3865224288352 | PnL: $0.00
+[00:16:12] | INFO | Risk: $102.05 | SL Dist: 1.27 | Calculated Lots: 0.8
+[00:16:12] | INFO | BACKTEST: Opened SELL at 2012.4500859343511
+[00:16:12] | INFO | BACKTEST: Closed Reverse Cross at 2013.0279317239 | PnL: $-46.23
+[00:16:12] | INFO | Risk: $101.58 | SL Dist: 1.29 | Calculated Lots: 0.79
+[00:16:12] | INFO | BACKTEST: Opened SELL at 2014.915831322067
+[00:16:12] | INFO | BACKTEST: Closed SL at 2014.915831322067 | PnL: $0.00
+[00:16:12] | INFO | Risk: $101.58 | SL Dist: 0.53 | Calculated Lots: 1.93
+[00:16:12] | INFO | BACKTEST: Opened SELL at 2014.5868696232928
+[00:16:12] | INFO | BACKTEST: Closed SL at 2014.5868696232928 | PnL: $0.00
+[00:16:12] | INFO | Risk: $101.58 | SL Dist: 1.05 | Calculated Lots: 0.96
+[00:16:12] | INFO | BACKTEST: Opened SELL at 2014.077501157408
+[00:16:12] | INFO | BACKTEST: Closed SL at 2014.077501157408 | PnL: $0.00
+[00:16:12] | INFO | Risk: $101.58 | SL Dist: 0.61 | Calculated Lots: 1.66
+[00:16:12] | INFO | BACKTEST: Opened BUY at 2017.454009720393
+[00:16:12] | INFO | BACKTEST: Closed SL at 2017.454009720393 | PnL: $0.00
+[00:16:12] | INFO | Risk: $101.58 | SL Dist: 0.58 | Calculated Lots: 1.74
+[00:16:12] | INFO | BACKTEST: Opened BUY at 2017.6793730214404
+[00:16:12] | INFO | BACKTEST: Closed TP at 2018.5529949085608 | PnL: $152.01
+[00:16:13] | INFO | Risk: $103.10 | SL Dist: 0.63 | Calculated Lots: 1.65
+[00:16:13] | INFO | BACKTEST: Opened SELL at 2016.100714583681
+[00:16:13] | INFO | BACKTEST: Closed SL at 2016.100714583681 | PnL: $0.00
+[00:16:13] | INFO | Risk: $103.10 | SL Dist: 0.93 | Calculated Lots: 1.11
+[00:16:13] | INFO | BACKTEST: Opened BUY at 2016.115901711147
+[00:16:13] | INFO | BACKTEST: Closed SL at 2016.115901711147 | PnL: $0.00
+[00:16:13] | INFO | Risk: $103.10 | SL Dist: 0.71 | Calculated Lots: 1.45
+[00:16:13] | INFO | BACKTEST: Opened BUY at 2016.4164814104895
+[00:16:13] | INFO | BACKTEST: Closed SL at 2016.4164814104895 | PnL: $0.00
+[00:16:13] | INFO | Risk: $103.10 | SL Dist: 0.83 | Calculated Lots: 1.24
+[00:16:13] | INFO | BACKTEST: Opened SELL at 2016.04347854084
+[00:16:13] | INFO | BACKTEST: Closed Reverse Cross at 2016.5595654321687 | PnL: $-63.99
+[00:16:13] | INFO | Risk: $102.46 | SL Dist: 0.68 | Calculated Lots: 1.5
+[00:16:13] | INFO | BACKTEST: Opened SELL at 2016.1942028059625
+[00:16:13] | INFO | BACKTEST: Closed SL at 2016.1942028059625 | PnL: $0.00
+[00:16:13] | INFO | Risk: $102.46 | SL Dist: 0.98 | Calculated Lots: 1.04
+[00:16:13] | INFO | BACKTEST: Opened SELL at 2015.9718620618517
+[00:16:13] | INFO | BACKTEST: Closed SL at 2016.954281630236 | PnL: $-102.17
+[00:16:13] | INFO | Risk: $101.44 | SL Dist: 0.89 | Calculated Lots: 1.14
+[00:16:13] | INFO | BACKTEST: Opened SELL at 2016.236891484691
+[00:16:13] | INFO | BACKTEST: Closed SL at 2016.236891484691 | PnL: $0.00
+[00:16:13] | INFO | Risk: $101.44 | SL Dist: 0.89 | Calculated Lots: 1.14
+[00:16:13] | INFO | BACKTEST: Opened SELL at 2016.1276364197224
+[00:16:13] | INFO | BACKTEST: Closed Reverse Cross at 2016.402524038357 | PnL: $-31.34
+[00:16:13] | INFO | Risk: $101.13 | SL Dist: 1.05 | Calculated Lots: 0.97
+[00:16:13] | INFO | BACKTEST: Opened SELL at 2015.975389195561
+[00:16:13] | INFO | BACKTEST: Closed Reverse Cross at 2016.602938902293 | PnL: $-60.87
+[00:16:13] | INFO | Risk: $100.52 | SL Dist: 0.97 | Calculated Lots: 1.03
+[00:16:13] | INFO | BACKTEST: Opened SELL at 2016.7501646219728
+[00:16:13] | INFO | BACKTEST: Closed Reverse Cross at 2017.215885409544 | PnL: $-47.97
+[00:16:13] | INFO | Risk: $100.04 | SL Dist: 1.39 | Calculated Lots: 0.72
+[00:16:13] | INFO | BACKTEST: Opened SELL at 2017.27092000164
+[00:16:13] | INFO | BACKTEST: Closed SL at 2017.27092000164 | PnL: $0.00
+[00:16:13] | INFO | Risk: $100.04 | SL Dist: 1.16 | Calculated Lots: 0.87
+[00:16:13] | INFO | BACKTEST: Opened BUY at 2016.6110277504715
+[00:16:13] | INFO | BACKTEST: Closed SL at 2016.6110277504715 | PnL: $0.00
+[00:16:14] | INFO | Risk: $100.04 | SL Dist: 0.97 | Calculated Lots: 1.03
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2015.56960174176
+[00:16:14] | INFO | BACKTEST: Closed SL at 2015.56960174176 | PnL: $0.00
+[00:16:14] | INFO | Risk: $100.04 | SL Dist: 1.04 | Calculated Lots: 0.96
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2015.2290148744528
+[00:16:14] | INFO | BACKTEST: Closed Reverse Cross at 2015.4709453417304 | PnL: $-23.23
+[00:16:14] | INFO | Risk: $99.81 | SL Dist: 0.87 | Calculated Lots: 1.14
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2015.3039167614045
+[00:16:14] | INFO | BACKTEST: Closed Reverse Cross at 2015.721824505744 | PnL: $-47.64
+[00:16:14] | INFO | Risk: $99.33 | SL Dist: 1.01 | Calculated Lots: 0.98
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2015.412659673474
+[00:16:14] | INFO | BACKTEST: Closed SL at 2015.412659673474 | PnL: $0.00
+[00:16:14] | INFO | Risk: $99.33 | SL Dist: 1.03 | Calculated Lots: 0.97
+[00:16:14] | INFO | BACKTEST: Opened BUY at 2016.1503374645208
+[00:16:14] | INFO | BACKTEST: Closed Reverse Cross at 2015.698159231709 | PnL: $-43.86
+[00:16:14] | INFO | Risk: $98.89 | SL Dist: 0.49 | Calculated Lots: 2.04
+[00:16:14] | INFO | BACKTEST: Opened BUY at 2015.8824892540936
+[00:16:14] | INFO | BACKTEST: Closed SL at 2015.3965437547265 | PnL: $-99.13
+[00:16:14] | INFO | Risk: $97.90 | SL Dist: 0.84 | Calculated Lots: 1.16
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2017.4953367279893
+[00:16:14] | INFO | BACKTEST: Closed Reverse Cross at 2017.891018449113 | PnL: $-45.90
+[00:16:14] | INFO | Risk: $97.44 | SL Dist: 0.87 | Calculated Lots: 1.12
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2017.5246115545365
+[00:16:14] | INFO | BACKTEST: Closed SL at 2017.5246115545365 | PnL: $0.00
+[00:16:14] | INFO | Risk: $97.44 | SL Dist: 1.03 | Calculated Lots: 0.95
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2015.625610969232
+[00:16:14] | INFO | BACKTEST: Closed Reverse Cross at 2015.9755277500728 | PnL: $-33.24
+[00:16:14] | INFO | Risk: $97.11 | SL Dist: 0.81 | Calculated Lots: 1.19
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2015.8005119989537
+[00:16:14] | INFO | BACKTEST: Closed SL at 2015.8005119989537 | PnL: $0.00
+[00:16:14] | INFO | Risk: $97.11 | SL Dist: 0.92 | Calculated Lots: 1.06
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2016.56761645044
+[00:16:14] | INFO | BACKTEST: Closed Reverse Cross at 2016.8820225279865 | PnL: $-33.33
+[00:16:14] | INFO | Risk: $96.78 | SL Dist: 0.81 | Calculated Lots: 1.2
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2016.6189608246912
+[00:16:14] | INFO | BACKTEST: Closed SL at 2017.426308469513 | PnL: $-96.88
+[00:16:14] | INFO | Risk: $95.81 | SL Dist: 0.93 | Calculated Lots: 1.03
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2016.7554645949076
+[00:16:14] | INFO | BACKTEST: Closed SL at 2016.7554645949076 | PnL: $0.00
+[00:16:14] | INFO | Risk: $95.81 | SL Dist: 0.84 | Calculated Lots: 1.14
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2017.3408904059413
+[00:16:14] | INFO | BACKTEST: Closed SL at 2017.3408904059413 | PnL: $0.00
+[00:16:14] | INFO | Risk: $95.81 | SL Dist: 0.73 | Calculated Lots: 1.31
+[00:16:14] | INFO | BACKTEST: Opened SELL at 2017.4192473995213
+[00:16:14] | INFO | BACKTEST: Closed Reverse Cross at 2018.0412126131812 | PnL: $-81.48
+[00:16:14] | INFO | Risk: $94.99 | SL Dist: 0.98 | Calculated Lots: 0.97
+[00:16:15] | INFO | BACKTEST: Opened SELL at 2017.2062646673005
+[00:16:15] | INFO | BACKTEST: Closed SL at 2017.2062646673005 | PnL: $0.00
+[00:16:15] | INFO | Risk: $94.99 | SL Dist: 0.81 | Calculated Lots: 1.17
+[00:16:15] | INFO | BACKTEST: Opened SELL at 2017.586260731933
+[00:16:15] | INFO | BACKTEST: Closed SL at 2017.586260731933 | PnL: $0.00
+[00:16:15] | INFO | Risk: $94.99 | SL Dist: 1.00 | Calculated Lots: 0.95
+[00:16:15] | INFO | BACKTEST: Opened BUY at 2017.3297518007985
+[00:16:15] | INFO | BACKTEST: Closed SL at 2017.3297518007985 | PnL: $0.00
+[00:16:15] | INFO | Risk: $94.99 | SL Dist: 1.11 | Calculated Lots: 0.86
+[00:16:15] | INFO | BACKTEST: Opened BUY at 2018.741717445688
+[00:16:15] | INFO | BACKTEST: Closed SL at 2018.741717445688 | PnL: $0.00
+[00:16:15] | INFO | Risk: $94.99 | SL Dist: 1.04 | Calculated Lots: 0.91
+[00:16:15] | INFO | BACKTEST: Opened BUY at 2018.059015808952
+[00:16:15] | INFO | BACKTEST: Closed TP at 2019.6228919789173 | PnL: $142.31
+[00:16:15] | INFO | Risk: $96.42 | SL Dist: 1.18 | Calculated Lots: 0.82
+[00:16:15] | INFO | BACKTEST: Opened BUY at 2019.9038112491835
+[00:16:15] | INFO | BACKTEST: Closed SL at 2019.9038112491835 | PnL: $0.00
+[00:16:15] | INFO | Risk: $96.42 | SL Dist: 0.82 | Calculated Lots: 1.18
+[00:16:15] | INFO | BACKTEST: Opened BUY at 2019.9199738903749
+[00:16:15] | INFO | BACKTEST: Closed SL at 2019.9199738903749 | PnL: $0.00
+[00:16:15] | INFO | Risk: $96.42 | SL Dist: 1.47 | Calculated Lots: 0.66
+[00:16:15] | INFO | BACKTEST: Opened BUY at 2018.3593103198432
+[00:16:15] | INFO | BACKTEST: Closed Reverse Cross at 2017.913861026236 | PnL: $-29.40
+[00:16:15] | INFO | Risk: $96.12 | SL Dist: 0.93 | Calculated Lots: 1.04
+[00:16:15] | INFO | BACKTEST: Opened BUY at 2018.3929915182264
+[00:16:15] | INFO | BACKTEST: Closed SL at 2018.3929915182264 | PnL: $0.00
+[00:16:15] | INFO | Risk: $96.12 | SL Dist: 1.09 | Calculated Lots: 0.88
+[00:16:15] | INFO | BACKTEST: Opened BUY at 2019.3581749988252
+[00:16:15] | INFO | BACKTEST: Closed SL at 2019.3581749988252 | PnL: $0.00
+[00:16:15] | INFO | Risk: $96.12 | SL Dist: 1.10 | Calculated Lots: 0.88
+[00:16:15] | INFO | BACKTEST: Opened BUY at 2018.954584808622
+[00:16:15] | INFO | BACKTEST: Closed SL at 2018.954584808622 | PnL: $0.00
+[00:16:15] | INFO | Risk: $96.12 | SL Dist: 0.58 | Calculated Lots: 1.64
+[00:16:15] | INFO | BACKTEST: Opened BUY at 2019.14073919378
+[00:16:15] | INFO | BACKTEST: Closed TP at 2020.017455023416 | PnL: $143.78
+[00:16:16] | INFO | Risk: $97.56 | SL Dist: 1.07 | Calculated Lots: 0.91
+[00:16:16] | INFO | BACKTEST: Opened BUY at 2016.378570225761
+[00:16:16] | INFO | BACKTEST: Closed SL at 2016.378570225761 | PnL: $0.00
+[00:16:16] | INFO | Risk: $97.56 | SL Dist: 0.97 | Calculated Lots: 1.01
+[00:16:16] | INFO | BACKTEST: Opened BUY at 2016.9933641208545
+[00:16:16] | INFO | BACKTEST: Closed SL at 2016.9933641208545 | PnL: $0.00
+[00:16:16] | INFO | Risk: $97.56 | SL Dist: 0.88 | Calculated Lots: 1.11
+[00:16:16] | INFO | BACKTEST: Opened SELL at 2016.5803746430156
+[00:16:16] | INFO | BACKTEST: Closed SL at 2016.5803746430156 | PnL: $0.00
+[00:16:32] | INFO | 
+================================================================================
+[00:16:32] | INFO | Time                 | Side | Entry    | Exit     | PnL ($)    | Result
+[00:16:32] | INFO | --------------------------------------------------------------------------------
+[00:16:32] | INFO | 2026-02-17 03:21:28.474966 | SELL | 2000.85  | 2000.85  | 0.00       | ❌
+[00:16:32] | INFO | 2026-02-17 04:05:28.474966 | SELL | 2000.97  | 2001.41  | -32.83     | ❌
+[00:16:32] | INFO | 2026-02-17 04:24:28.474966 | SELL | 2001.29  | 2001.29  | 0.00       | ❌
+[00:16:32] | INFO | 2026-02-17 05:02:28.474966 | SELL | 2001.89  | 2001.89  | 0.00       | ❌
+[00:16:32] | INFO | 2026-02-17 05:45:28.474966 | SELL | 2000.66  | 2000.66  | 0.00       | ❌
+[00:16:32] | INFO | 2026-02-17 05:59:28.474966 | SELL | 2000.68  | 2001.25  | -53.31     | ❌
+[00:16:32] | INFO | 2026-02-17 06:05:28.474966 | SELL | 2000.86  | 2000.86  | 0.00       | ❌
+[00:16:32] | INFO | 2026-02-17 07:08:28.474966 | SELL | 1997.92  | 1998.63  | -47.09     | ❌
+[00:16:32] | INFO | 2026-02-17 07:23:28.474966 | BUY  | 1998.63  | 1998.63  | 0.00       | ❌
+[00:16:32] | INFO | 2026-02-17 07:40:28.474966 | BUY  | 1998.53  | 1998.34  | -33.20     | ❌
+[00:16:32] | INFO | 2026-02-17 07:42:28.474966 | BUY  | 1998.52  | 1999.32  | 147.55     | ✅
+[00:16:32] | INFO | 2026-02-17 09:23:28.474966 | SELL | 1998.54  | 1998.54  | 0.00       | ❌
+[00:16:32] | INFO | 2026-02-17 09:41:28.474966 | SELL | 1998.27  | 1998.27  | 0.00       | ❌
+[00:16:32] | INFO | 2026-02-17 10:02:28.474966 | SELL | 1997.87  | 1996.57  | 149.42     | ✅
+[00:16:32] | INFO | 2026-02-17 11:07:28.474966 | SELL | 1998.55  | 1998.80  | -34.16     | ❌
+[00:16:32] | INFO | 2026-02-17 11:09:28.474966 | SELL | 1998.62  | 1998.62  | 0.00       | ❌
+[00:16:32] | INFO | 2026-02-17 11:34:28.474966 | SELL | 1999.22  | 1999.57  | -26.21     | ❌
+[00:16:32] | INFO | 2026-02-17 13:37:28.474966 | BUY  | 2004.24  | 2004.24  | 0.00       | ❌
+[00:16:32] | INFO | 2026-02-17 14:21:28.474966 | BUY  | 2004.33  | 2006.09  | 151.04     | ✅
+[00:16:32] | INFO | 2026-02-17 15:44:28.474966 | BUY  | 2006.69  | 2006.69  | 0.00       | ❌
+[00:16:32] | INFO | 2026-02-17 16:58:28.474966 | BUY  | 2009.58  | 2009.02  | -38.41     | ❌
+[00:16:32] | INFO | 2026-02-17 17:01:28.474966 | BUY  | 2009.47  | 2008.87  | -44.31     | ❌
+[00:16:33] | INFO | 2026-02-17 17:05:28.474966 | BUY  | 2009.56  | 2009.56  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-17 17:45:28.474966 | BUY  | 2009.30  | 2009.16  | -15.58     | ❌
+[00:16:33] | INFO | 2026-02-17 18:02:28.474966 | BUY  | 2009.07  | 2010.21  | 152.09     | ✅
+[00:16:33] | INFO | 2026-02-17 18:41:28.474966 | BUY  | 2009.73  | 2009.73  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-17 18:55:28.474966 | BUY  | 2009.63  | 2009.63  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-17 19:15:28.474966 | BUY  | 2009.88  | 2009.88  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-17 19:43:28.474966 | BUY  | 2010.30  | 2009.92  | -70.32     | ❌
+[00:16:33] | INFO | 2026-02-17 19:53:28.474966 | BUY  | 2010.39  | 2010.39  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-17 22:28:28.474966 | SELL | 2012.45  | 2013.03  | -46.23     | ❌
+[00:16:33] | INFO | 2026-02-17 23:16:28.474966 | SELL | 2014.92  | 2014.92  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-17 23:32:28.474966 | SELL | 2014.59  | 2014.59  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-17 23:42:28.474966 | SELL | 2014.08  | 2014.08  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 02:39:28.474966 | BUY  | 2017.45  | 2017.45  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 02:57:28.474966 | BUY  | 2017.68  | 2018.55  | 152.01     | ✅
+[00:16:33] | INFO | 2026-02-18 04:17:28.474966 | SELL | 2016.10  | 2016.10  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 04:34:28.474966 | BUY  | 2016.12  | 2016.12  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 04:54:28.474966 | BUY  | 2016.42  | 2016.42  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 04:59:28.474966 | SELL | 2016.04  | 2016.56  | -63.99     | ❌
+[00:16:33] | INFO | 2026-02-18 05:03:28.474966 | SELL | 2016.19  | 2016.19  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 05:28:28.474966 | SELL | 2015.97  | 2016.95  | -102.17    | ❌
+[00:16:33] | INFO | 2026-02-18 05:38:28.474966 | SELL | 2016.24  | 2016.24  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 06:14:28.474966 | SELL | 2016.13  | 2016.40  | -31.34     | ❌
+[00:16:33] | INFO | 2026-02-18 06:16:28.474966 | SELL | 2015.98  | 2016.60  | -60.87     | ❌
+[00:16:33] | INFO | 2026-02-18 06:42:28.474966 | SELL | 2016.75  | 2017.22  | -47.97     | ❌
+[00:16:33] | INFO | 2026-02-18 07:04:28.474966 | SELL | 2017.27  | 2017.27  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 08:11:28.474966 | BUY  | 2016.61  | 2016.61  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 09:27:28.474966 | SELL | 2015.57  | 2015.57  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 09:48:28.474966 | SELL | 2015.23  | 2015.47  | -23.23     | ❌
+[00:16:33] | INFO | 2026-02-18 09:54:28.474966 | SELL | 2015.30  | 2015.72  | -47.64     | ❌
+[00:16:33] | INFO | 2026-02-18 10:08:28.474966 | SELL | 2015.41  | 2015.41  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 11:02:28.474966 | BUY  | 2016.15  | 2015.70  | -43.86     | ❌
+[00:16:33] | INFO | 2026-02-18 11:09:28.474966 | BUY  | 2015.88  | 2015.40  | -99.13     | ❌
+[00:16:33] | INFO | 2026-02-18 12:47:28.474966 | SELL | 2017.50  | 2017.89  | -45.90     | ❌
+[00:16:33] | INFO | 2026-02-18 13:00:28.474966 | SELL | 2017.52  | 2017.52  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 14:19:28.474966 | SELL | 2015.63  | 2015.98  | -33.24     | ❌
+[00:16:33] | INFO | 2026-02-18 14:29:28.474966 | SELL | 2015.80  | 2015.80  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 15:12:28.474966 | SELL | 2016.57  | 2016.88  | -33.33     | ❌
+[00:16:33] | INFO | 2026-02-18 15:25:28.474966 | SELL | 2016.62  | 2017.43  | -96.88     | ❌
+[00:16:33] | INFO | 2026-02-18 15:38:28.474966 | SELL | 2016.76  | 2016.76  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 16:01:28.474966 | SELL | 2017.34  | 2017.34  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 16:07:28.474966 | SELL | 2017.42  | 2018.04  | -81.48     | ❌
+[00:16:33] | INFO | 2026-02-18 16:16:28.474966 | SELL | 2017.21  | 2017.21  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 16:57:28.474966 | SELL | 2017.59  | 2017.59  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 17:20:28.474966 | BUY  | 2017.33  | 2017.33  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 17:53:28.474966 | BUY  | 2018.74  | 2018.74  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 18:36:28.474966 | BUY  | 2018.06  | 2019.62  | 142.31     | ✅
+[00:16:33] | INFO | 2026-02-18 20:35:28.474966 | BUY  | 2019.90  | 2019.90  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 20:45:28.474966 | BUY  | 2019.92  | 2019.92  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 21:59:28.474966 | BUY  | 2018.36  | 2017.91  | -29.40     | ❌
+[00:16:33] | INFO | 2026-02-18 22:15:28.474966 | BUY  | 2018.39  | 2018.39  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 22:55:28.474966 | BUY  | 2019.36  | 2019.36  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 23:20:28.474966 | BUY  | 2018.95  | 2018.95  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-18 23:29:28.474966 | BUY  | 2019.14  | 2020.02  | 143.78     | ✅
+[00:16:33] | INFO | 2026-02-19 00:52:28.474966 | BUY  | 2016.38  | 2016.38  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-19 01:17:28.474966 | BUY  | 2016.99  | 2016.99  | 0.00       | ❌
+[00:16:33] | INFO | 2026-02-19 02:01:28.474966 | SELL | 2016.58  | 2016.58  | 0.00       | ❌
+[00:16:33] | INFO | ================================================================================
+
+[00:16:33] | INFO | 
+==============================
+[00:16:33] | INFO |    🚀 BACKTEST SUMMARY 🚀   
+[00:16:33] | INFO | ==============================
+[00:16:33] | INFO | Total Trades:      78
+[00:16:33] | INFO | Win Rate:          9.0%
+[00:16:33] | INFO | Profit Factor:     0.81
+[00:16:33] | INFO | Max Drawdown:      7.9%
+[00:16:33] | INFO | Total Net Profit:  $-243.86
+[00:16:33] | INFO | Final Balance:     $9756.14
+[00:16:33] | INFO | ==============================
+
+[00:16:46] | INFO | 🎬 *Starting Historical Playback*
+[00:16:47] | INFO | Starting Backtest...
+[00:16:47] | INFO | Risk: $100.00 | SL Dist: 0.77 | Calculated Lots: 1.29
+[00:16:47] | INFO | BACKTEST: Opened SELL at 2000.8465810262092
+[00:16:47] | INFO | BACKTEST: Closed SL at 2000.8465810262092 | PnL: $0.00
+[00:16:47] | INFO | Risk: $100.00 | SL Dist: 1.35 | Calculated Lots: 0.74
+[00:16:47] | INFO | BACKTEST: Opened SELL at 2000.969797701688
+[00:16:47] | INFO | BACKTEST: Closed Reverse Cross at 2001.413383064686 | PnL: $-32.83
+[00:16:47] | INFO | Risk: $99.67 | SL Dist: 0.77 | Calculated Lots: 1.3
+[00:16:47] | INFO | BACKTEST: Opened SELL at 2001.2855600971227
+[00:16:47] | INFO | BACKTEST: Closed SL at 2001.2855600971227 | PnL: $0.00
+[00:16:47] | INFO | Risk: $99.67 | SL Dist: 1.37 | Calculated Lots: 0.73
+[00:16:47] | INFO | BACKTEST: Opened SELL at 2001.8905030695137
+[00:16:47] | INFO | BACKTEST: Closed SL at 2001.8905030695137 | PnL: $0.00
+[00:16:47] | INFO | Risk: $99.67 | SL Dist: 1.31 | Calculated Lots: 0.76
+[00:16:47] | INFO | BACKTEST: Opened SELL at 2000.6628499764145
+[00:16:47] | INFO | BACKTEST: Closed SL at 2000.6628499764145 | PnL: $0.00
+[00:16:47] | INFO | Risk: $99.67 | SL Dist: 1.06 | Calculated Lots: 0.94
+[00:16:47] | INFO | BACKTEST: Opened SELL at 2000.6837994588648
+[00:16:47] | INFO | BACKTEST: Closed Reverse Cross at 2001.2509182964648 | PnL: $-53.31
+[00:16:47] | INFO | Risk: $99.14 | SL Dist: 0.88 | Calculated Lots: 1.12
+[00:16:47] | INFO | BACKTEST: Opened SELL at 2000.856245038462
+[00:16:47] | INFO | BACKTEST: Closed SL at 2000.856245038462 | PnL: $0.00
+[00:16:47] | INFO | Risk: $99.14 | SL Dist: 1.49 | Calculated Lots: 0.66
+[00:16:47] | INFO | BACKTEST: Opened SELL at 1997.921418192956
+[00:16:47] | INFO | BACKTEST: Closed Reverse Cross at 1998.6349722112525 | PnL: $-47.09
+[00:16:47] | INFO | Risk: $98.67 | SL Dist: 1.12 | Calculated Lots: 0.88
+[00:16:47] | INFO | BACKTEST: Opened BUY at 1998.6349722112525
+[00:16:47] | INFO | BACKTEST: Closed SL at 1998.6349722112525 | PnL: $0.00
+[00:16:47] | INFO | Risk: $98.67 | SL Dist: 0.55 | Calculated Lots: 1.8
+[00:16:47] | INFO | BACKTEST: Opened BUY at 1998.529085216936
+[00:16:47] | INFO | BACKTEST: Closed Reverse Cross at 1998.3446521521005 | PnL: $-33.20
+[00:16:47] | INFO | Risk: $98.34 | SL Dist: 0.54 | Calculated Lots: 1.83
+[00:16:47] | INFO | BACKTEST: Opened BUY at 1998.5185733361216
+[00:16:47] | INFO | BACKTEST: Closed TP at 1999.3248609903678 | PnL: $147.55
+[00:16:48] | INFO | Risk: $99.81 | SL Dist: 0.80 | Calculated Lots: 1.25
+[00:16:48] | INFO | BACKTEST: Opened SELL at 1998.54226100458
+[00:16:48] | INFO | BACKTEST: Closed SL at 1998.54226100458 | PnL: $0.00
+[00:16:48] | INFO | Risk: $99.81 | SL Dist: 0.83 | Calculated Lots: 1.2
+[00:16:48] | INFO | BACKTEST: Opened SELL at 1998.2650742207013
+[00:16:48] | INFO | BACKTEST: Closed SL at 1998.2650742207013 | PnL: $0.00
+[00:16:48] | INFO | Risk: $99.81 | SL Dist: 0.87 | Calculated Lots: 1.15
+[00:16:48] | INFO | BACKTEST: Opened SELL at 1997.870694662118
+[00:16:48] | INFO | BACKTEST: Closed TP at 1996.5713484833077 | PnL: $149.42
+[00:16:48] | INFO | Risk: $101.31 | SL Dist: 0.75 | Calculated Lots: 1.36
+[00:16:48] | INFO | BACKTEST: Opened SELL at 1998.547513603764
+[00:16:48] | INFO | BACKTEST: Closed Reverse Cross at 1998.7986648288784 | PnL: $-34.16
+[00:16:48] | INFO | Risk: $100.96 | SL Dist: 0.67 | Calculated Lots: 1.5
+[00:16:48] | INFO | BACKTEST: Opened SELL at 1998.619743368435
+[00:16:48] | INFO | BACKTEST: Closed SL at 1998.619743368435 | PnL: $0.00
+[00:16:48] | INFO | Risk: $100.96 | SL Dist: 1.36 | Calculated Lots: 0.74
+[00:16:48] | INFO | BACKTEST: Opened SELL at 1999.217478383542
+[00:16:48] | INFO | BACKTEST: Closed Reverse Cross at 1999.5716151001595 | PnL: $-26.21
+[00:16:48] | INFO | Risk: $100.70 | SL Dist: 0.85 | Calculated Lots: 1.19
+[00:16:48] | INFO | BACKTEST: Opened BUY at 2004.2435048758975
+[00:16:48] | INFO | BACKTEST: Closed SL at 2004.2435048758975 | PnL: $0.00
+[00:16:48] | INFO | Risk: $100.70 | SL Dist: 1.17 | Calculated Lots: 0.86
+[00:16:48] | INFO | BACKTEST: Opened BUY at 2004.3312089883648
+[00:16:48] | INFO | BACKTEST: Closed TP at 2006.0875361807075 | PnL: $151.04
+[00:16:48] | INFO | Risk: $102.21 | SL Dist: 1.03 | Calculated Lots: 0.99
+[00:16:48] | INFO | BACKTEST: Opened BUY at 2006.6879697459397
+[00:16:48] | INFO | BACKTEST: Closed SL at 2006.6879697459397 | PnL: $0.00
+[00:16:49] | INFO | Risk: $102.21 | SL Dist: 1.50 | Calculated Lots: 0.68
+[00:16:49] | INFO | BACKTEST: Opened BUY at 2009.5802088014905
+[00:16:49] | INFO | BACKTEST: Closed Reverse Cross at 2009.0153613818136 | PnL: $-38.41
+[00:16:49] | INFO | Risk: $101.83 | SL Dist: 1.39 | Calculated Lots: 0.73
+[00:16:49] | INFO | BACKTEST: Opened BUY at 2009.473549896332
+[00:16:49] | INFO | BACKTEST: Closed Reverse Cross at 2008.866555653588 | PnL: $-44.31
+[00:16:49] | INFO | Risk: $101.39 | SL Dist: 1.14 | Calculated Lots: 0.89
+[00:16:49] | INFO | BACKTEST: Opened BUY at 2009.5590202212572
+[00:16:49] | INFO | BACKTEST: Closed SL at 2009.5590202212572 | PnL: $0.00
+[00:16:49] | INFO | Risk: $101.39 | SL Dist: 0.91 | Calculated Lots: 1.11
+[00:16:49] | INFO | BACKTEST: Opened BUY at 2009.3019050552864
+[00:16:49] | INFO | BACKTEST: Closed Reverse Cross at 2009.1615067177247 | PnL: $-15.58
+[00:16:49] | INFO | Risk: $101.23 | SL Dist: 0.76 | Calculated Lots: 1.34
+[00:16:49] | INFO | BACKTEST: Opened BUY at 2009.071089999931
+[00:16:49] | INFO | BACKTEST: Closed TP at 2010.2060985918733 | PnL: $152.09
+[00:16:49] | INFO | Risk: $102.75 | SL Dist: 0.86 | Calculated Lots: 1.2
+[00:16:49] | INFO | BACKTEST: Opened BUY at 2009.7327914341872
+[00:16:49] | INFO | BACKTEST: Closed SL at 2009.7327914341872 | PnL: $0.00
+[00:16:49] | INFO | Risk: $102.75 | SL Dist: 0.96 | Calculated Lots: 1.07
+[00:16:49] | INFO | BACKTEST: Opened BUY at 2009.633931413599
+[00:16:49] | INFO | BACKTEST: Closed SL at 2009.633931413599 | PnL: $0.00
+[00:16:49] | INFO | Risk: $102.75 | SL Dist: 1.12 | Calculated Lots: 0.92
+[00:16:49] | INFO | BACKTEST: Opened BUY at 2009.8812726384783
+[00:16:49] | INFO | BACKTEST: Closed SL at 2009.8812726384783 | PnL: $0.00
+[00:16:49] | INFO | Risk: $102.75 | SL Dist: 0.56 | Calculated Lots: 1.84
+[00:16:49] | INFO | BACKTEST: Opened BUY at 2010.3019994616288
+[00:16:49] | INFO | BACKTEST: Closed Reverse Cross at 2009.91980103132 | PnL: $-70.32
+[00:16:49] | INFO | Risk: $102.05 | SL Dist: 1.37 | Calculated Lots: 0.75
+[00:16:49] | INFO | BACKTEST: Opened BUY at 2010.3865224288352
+[00:16:49] | INFO | BACKTEST: Closed SL at 2010.3865224288352 | PnL: $0.00
+[00:16:49] | INFO | Risk: $102.05 | SL Dist: 1.27 | Calculated Lots: 0.8
+[00:16:49] | INFO | BACKTEST: Opened SELL at 2012.4500859343511
+[00:16:49] | INFO | BACKTEST: Closed Reverse Cross at 2013.0279317239 | PnL: $-46.23
+[00:16:49] | INFO | Risk: $101.58 | SL Dist: 1.29 | Calculated Lots: 0.79
+[00:16:49] | INFO | BACKTEST: Opened SELL at 2014.915831322067
+[00:16:49] | INFO | BACKTEST: Closed SL at 2014.915831322067 | PnL: $0.00
+[00:16:49] | INFO | Risk: $101.58 | SL Dist: 0.53 | Calculated Lots: 1.93
+[00:16:49] | INFO | BACKTEST: Opened SELL at 2014.5868696232928
+[00:16:49] | INFO | BACKTEST: Closed SL at 2014.5868696232928 | PnL: $0.00
+[00:16:49] | INFO | Risk: $101.58 | SL Dist: 1.05 | Calculated Lots: 0.96
+[00:16:49] | INFO | BACKTEST: Opened SELL at 2014.077501157408
+[00:16:49] | INFO | BACKTEST: Closed SL at 2014.077501157408 | PnL: $0.00
+[00:16:50] | INFO | Risk: $101.58 | SL Dist: 0.61 | Calculated Lots: 1.66
+[00:16:50] | INFO | BACKTEST: Opened BUY at 2017.454009720393
+[00:16:50] | INFO | BACKTEST: Closed SL at 2017.454009720393 | PnL: $0.00
+[00:16:50] | INFO | Risk: $101.58 | SL Dist: 0.58 | Calculated Lots: 1.74
+[00:16:50] | INFO | BACKTEST: Opened BUY at 2017.6793730214404
+[00:16:50] | INFO | BACKTEST: Closed TP at 2018.5529949085608 | PnL: $152.01
+[00:16:50] | INFO | Risk: $103.10 | SL Dist: 0.63 | Calculated Lots: 1.65
+[00:16:50] | INFO | BACKTEST: Opened SELL at 2016.100714583681
+[00:16:50] | INFO | BACKTEST: Closed SL at 2016.100714583681 | PnL: $0.00
+[00:16:50] | INFO | Risk: $103.10 | SL Dist: 0.93 | Calculated Lots: 1.11
+[00:16:50] | INFO | BACKTEST: Opened BUY at 2016.115901711147
+[00:16:50] | INFO | BACKTEST: Closed SL at 2016.115901711147 | PnL: $0.00
+[00:16:50] | INFO | Risk: $103.10 | SL Dist: 0.71 | Calculated Lots: 1.45
+[00:16:50] | INFO | BACKTEST: Opened BUY at 2016.4164814104895
+[00:16:50] | INFO | BACKTEST: Closed SL at 2016.4164814104895 | PnL: $0.00
+[00:16:50] | INFO | Risk: $103.10 | SL Dist: 0.83 | Calculated Lots: 1.24
+[00:16:50] | INFO | BACKTEST: Opened SELL at 2016.04347854084
+[00:16:50] | INFO | BACKTEST: Closed Reverse Cross at 2016.5595654321687 | PnL: $-63.99
+[00:16:50] | INFO | Risk: $102.46 | SL Dist: 0.68 | Calculated Lots: 1.5
+[00:16:50] | INFO | BACKTEST: Opened SELL at 2016.1942028059625
+[00:16:50] | INFO | BACKTEST: Closed SL at 2016.1942028059625 | PnL: $0.00
+[00:16:50] | INFO | Risk: $102.46 | SL Dist: 0.98 | Calculated Lots: 1.04
+[00:16:50] | INFO | BACKTEST: Opened SELL at 2015.9718620618517
+[00:16:50] | INFO | BACKTEST: Closed SL at 2016.954281630236 | PnL: $-102.17
+[00:16:50] | INFO | Risk: $101.44 | SL Dist: 0.89 | Calculated Lots: 1.14
+[00:16:50] | INFO | BACKTEST: Opened SELL at 2016.236891484691
+[00:16:50] | INFO | BACKTEST: Closed SL at 2016.236891484691 | PnL: $0.00
+[00:16:50] | INFO | Risk: $101.44 | SL Dist: 0.89 | Calculated Lots: 1.14
+[00:16:50] | INFO | BACKTEST: Opened SELL at 2016.1276364197224
+[00:16:50] | INFO | BACKTEST: Closed Reverse Cross at 2016.402524038357 | PnL: $-31.34
+[00:16:50] | INFO | Risk: $101.13 | SL Dist: 1.05 | Calculated Lots: 0.97
+[00:16:50] | INFO | BACKTEST: Opened SELL at 2015.975389195561
+[00:16:50] | INFO | BACKTEST: Closed Reverse Cross at 2016.602938902293 | PnL: $-60.87
+[00:16:50] | INFO | Risk: $100.52 | SL Dist: 0.97 | Calculated Lots: 1.03
+[00:16:50] | INFO | BACKTEST: Opened SELL at 2016.7501646219728
+[00:16:50] | INFO | BACKTEST: Closed Reverse Cross at 2017.215885409544 | PnL: $-47.97
+[00:16:51] | INFO | Risk: $100.04 | SL Dist: 1.39 | Calculated Lots: 0.72
+[00:16:51] | INFO | BACKTEST: Opened SELL at 2017.27092000164
+[00:16:51] | INFO | BACKTEST: Closed SL at 2017.27092000164 | PnL: $0.00
+[00:16:51] | INFO | Risk: $100.04 | SL Dist: 1.16 | Calculated Lots: 0.87
+[00:16:51] | INFO | BACKTEST: Opened BUY at 2016.6110277504715
+[00:16:51] | INFO | BACKTEST: Closed SL at 2016.6110277504715 | PnL: $0.00
+[00:16:51] | INFO | Risk: $100.04 | SL Dist: 0.97 | Calculated Lots: 1.03
+[00:16:51] | INFO | BACKTEST: Opened SELL at 2015.56960174176
+[00:16:51] | INFO | BACKTEST: Closed SL at 2015.56960174176 | PnL: $0.00
+[00:16:51] | INFO | Risk: $100.04 | SL Dist: 1.04 | Calculated Lots: 0.96
+[00:16:51] | INFO | BACKTEST: Opened SELL at 2015.2290148744528
+[00:16:51] | INFO | BACKTEST: Closed Reverse Cross at 2015.4709453417304 | PnL: $-23.23
+[00:16:51] | INFO | Risk: $99.81 | SL Dist: 0.96 | Calculated Lots: 1.04
+[00:16:51] | INFO | BACKTEST: Opened SELL at 2015.3039167614045
+[00:16:51] | INFO | BACKTEST: Closed Reverse Cross at 2015.721824505744 | PnL: $-43.46
+[00:16:51] | INFO | Risk: $99.37 | SL Dist: 1.01 | Calculated Lots: 0.98
+[00:16:51] | INFO | BACKTEST: Opened SELL at 2015.412659673474
+[00:16:51] | INFO | BACKTEST: Closed SL at 2015.412659673474 | PnL: $0.00
+[00:16:51] | INFO | Risk: $99.37 | SL Dist: 1.03 | Calculated Lots: 0.97
+[00:16:51] | INFO | BACKTEST: Opened BUY at 2016.1503374645208
+[00:16:51] | INFO | BACKTEST: Closed Reverse Cross at 2015.698159231709 | PnL: $-43.86
+[00:16:51] | INFO | Risk: $98.94 | SL Dist: 0.50 | Calculated Lots: 1.98
+[00:16:51] | INFO | BACKTEST: Opened BUY at 2015.8824892540936
+[00:16:51] | INFO | BACKTEST: Closed SL at 2015.3824892540936 | PnL: $-99.00
+[00:16:51] | INFO | Risk: $97.95 | SL Dist: 0.84 | Calculated Lots: 1.16
+[00:16:51] | INFO | BACKTEST: Opened SELL at 2017.4953367279893
+[00:16:51] | INFO | BACKTEST: Closed Reverse Cross at 2017.891018449113 | PnL: $-45.90
+[00:16:51] | INFO | Risk: $97.49 | SL Dist: 0.87 | Calculated Lots: 1.12
+[00:16:51] | INFO | BACKTEST: Opened SELL at 2017.5246115545365
+[00:16:52] | INFO | BACKTEST: Closed SL at 2017.5246115545365 | PnL: $0.00
+[00:16:52] | INFO | Risk: $97.49 | SL Dist: 1.03 | Calculated Lots: 0.95
+[00:16:52] | INFO | BACKTEST: Opened SELL at 2015.625610969232
+[00:16:52] | INFO | BACKTEST: Closed Reverse Cross at 2015.9755277500728 | PnL: $-33.24
+[00:16:52] | INFO | Risk: $97.15 | SL Dist: 0.81 | Calculated Lots: 1.19
+[00:16:52] | INFO | BACKTEST: Opened SELL at 2015.8005119989537
+[00:16:52] | INFO | BACKTEST: Closed SL at 2015.8005119989537 | PnL: $0.00
+[00:16:52] | INFO | Risk: $97.15 | SL Dist: 1.27 | Calculated Lots: 0.76
+[00:16:52] | INFO | BACKTEST: Opened SELL at 2016.56761645044
+[00:16:52] | INFO | BACKTEST: Closed Reverse Cross at 2016.8820225279865 | PnL: $-23.89
+[00:16:52] | INFO | Risk: $96.92 | SL Dist: 0.81 | Calculated Lots: 1.2
+[00:16:52] | INFO | BACKTEST: Opened SELL at 2016.6189608246912
+[00:16:52] | INFO | BACKTEST: Closed SL at 2017.426308469513 | PnL: $-96.88
+[00:16:52] | INFO | Risk: $95.95 | SL Dist: 0.93 | Calculated Lots: 1.03
+[00:16:52] | INFO | BACKTEST: Opened SELL at 2016.7554645949076
+[00:16:52] | INFO | BACKTEST: Closed SL at 2016.7554645949076 | PnL: $0.00
+[00:16:52] | INFO | Risk: $95.95 | SL Dist: 0.84 | Calculated Lots: 1.14
+[00:16:52] | INFO | BACKTEST: Opened SELL at 2017.3408904059413
+[00:16:52] | INFO | BACKTEST: Closed SL at 2017.3408904059413 | PnL: $0.00
+[00:16:52] | INFO | Risk: $95.95 | SL Dist: 0.75 | Calculated Lots: 1.29
+[00:16:52] | INFO | BACKTEST: Opened SELL at 2017.4192473995213
+[00:16:52] | INFO | BACKTEST: Closed Reverse Cross at 2018.0412126131812 | PnL: $-80.23
+[00:16:52] | INFO | Risk: $95.14 | SL Dist: 0.98 | Calculated Lots: 0.97
+[00:16:52] | INFO | BACKTEST: Opened SELL at 2017.2062646673005
+[00:16:52] | INFO | BACKTEST: Closed SL at 2017.2062646673005 | PnL: $0.00
+[00:16:52] | INFO | Risk: $95.14 | SL Dist: 0.81 | Calculated Lots: 1.17
+[00:16:52] | INFO | BACKTEST: Opened SELL at 2017.586260731933
+[00:16:52] | INFO | BACKTEST: Closed SL at 2017.586260731933 | PnL: $0.00
+[00:16:52] | INFO | Risk: $95.14 | SL Dist: 1.00 | Calculated Lots: 0.95
+[00:16:52] | INFO | BACKTEST: Opened BUY at 2017.3297518007985
+[00:16:52] | INFO | BACKTEST: Closed SL at 2017.3297518007985 | PnL: $0.00
+[00:16:52] | INFO | Risk: $95.14 | SL Dist: 1.11 | Calculated Lots: 0.86
+[00:16:52] | INFO | BACKTEST: Opened BUY at 2018.741717445688
+[00:16:52] | INFO | BACKTEST: Closed SL at 2018.741717445688 | PnL: $0.00
+[00:16:52] | INFO | Risk: $95.14 | SL Dist: 1.04 | Calculated Lots: 0.91
+[00:16:52] | INFO | BACKTEST: Opened BUY at 2018.059015808952
+[00:16:52] | INFO | BACKTEST: Closed TP at 2019.6228919789173 | PnL: $142.31
+[00:16:52] | INFO | Risk: $96.57 | SL Dist: 1.18 | Calculated Lots: 0.82
+[00:16:52] | INFO | BACKTEST: Opened BUY at 2019.9038112491835
+[00:16:52] | INFO | BACKTEST: Closed SL at 2019.9038112491835 | PnL: $0.00
+[00:16:52] | INFO | Risk: $96.57 | SL Dist: 0.82 | Calculated Lots: 1.18
+[00:16:52] | INFO | BACKTEST: Opened BUY at 2019.9199738903749
+[00:16:52] | INFO | BACKTEST: Closed SL at 2019.9199738903749 | PnL: $0.00
+[00:16:53] | INFO | Risk: $96.57 | SL Dist: 1.47 | Calculated Lots: 0.66
+[00:16:53] | INFO | BACKTEST: Opened BUY at 2018.3593103198432
+[00:16:53] | INFO | BACKTEST: Closed Reverse Cross at 2017.913861026236 | PnL: $-29.40
+[00:16:53] | INFO | Risk: $96.27 | SL Dist: 0.93 | Calculated Lots: 1.04
+[00:16:53] | INFO | BACKTEST: Opened BUY at 2018.3929915182264
+[00:16:53] | INFO | BACKTEST: Closed SL at 2018.3929915182264 | PnL: $0.00
+[00:16:53] | INFO | Risk: $96.27 | SL Dist: 1.09 | Calculated Lots: 0.88
+[00:16:53] | INFO | BACKTEST: Opened BUY at 2019.3581749988252
+[00:16:53] | INFO | BACKTEST: Closed SL at 2019.3581749988252 | PnL: $0.00
+[00:16:53] | INFO | Risk: $96.27 | SL Dist: 1.10 | Calculated Lots: 0.88
+[00:16:53] | INFO | BACKTEST: Opened BUY at 2018.954584808622
+[00:16:53] | INFO | BACKTEST: Closed SL at 2018.954584808622 | PnL: $0.00
+[00:16:53] | INFO | Risk: $96.27 | SL Dist: 0.58 | Calculated Lots: 1.65
+[00:16:53] | INFO | BACKTEST: Opened BUY at 2019.14073919378
+[00:16:53] | INFO | BACKTEST: Closed TP at 2020.017455023416 | PnL: $144.66
+[00:16:53] | INFO | Risk: $97.72 | SL Dist: 1.07 | Calculated Lots: 0.91
+[00:16:53] | INFO | BACKTEST: Opened BUY at 2016.378570225761
+[00:16:53] | INFO | BACKTEST: Closed SL at 2016.378570225761 | PnL: $0.00
+[00:16:53] | INFO | Risk: $97.72 | SL Dist: 0.97 | Calculated Lots: 1.01
+[00:16:53] | INFO | BACKTEST: Opened BUY at 2016.9933641208545
+[00:16:53] | INFO | BACKTEST: Closed SL at 2016.9933641208545 | PnL: $0.00
+[00:16:53] | INFO | Risk: $97.72 | SL Dist: 0.88 | Calculated Lots: 1.11
+[00:16:53] | INFO | BACKTEST: Opened SELL at 2016.5803746430156
+[00:16:53] | INFO | BACKTEST: Closed SL at 2016.5803746430156 | PnL: $0.00
+[00:17:10] | INFO | 
+================================================================================
+[00:17:10] | INFO | Time                 | Side | Entry    | Exit     | PnL ($)    | Result
+[00:17:10] | INFO | --------------------------------------------------------------------------------
+[00:17:10] | INFO | 2026-02-17 03:21:28.474966 | SELL | 2000.85  | 2000.85  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 04:05:28.474966 | SELL | 2000.97  | 2001.41  | -32.83     | ❌
+[00:17:10] | INFO | 2026-02-17 04:24:28.474966 | SELL | 2001.29  | 2001.29  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 05:02:28.474966 | SELL | 2001.89  | 2001.89  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 05:45:28.474966 | SELL | 2000.66  | 2000.66  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 05:59:28.474966 | SELL | 2000.68  | 2001.25  | -53.31     | ❌
+[00:17:10] | INFO | 2026-02-17 06:05:28.474966 | SELL | 2000.86  | 2000.86  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 07:08:28.474966 | SELL | 1997.92  | 1998.63  | -47.09     | ❌
+[00:17:10] | INFO | 2026-02-17 07:23:28.474966 | BUY  | 1998.63  | 1998.63  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 07:40:28.474966 | BUY  | 1998.53  | 1998.34  | -33.20     | ❌
+[00:17:10] | INFO | 2026-02-17 07:42:28.474966 | BUY  | 1998.52  | 1999.32  | 147.55     | ✅
+[00:17:10] | INFO | 2026-02-17 09:23:28.474966 | SELL | 1998.54  | 1998.54  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 09:41:28.474966 | SELL | 1998.27  | 1998.27  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 10:02:28.474966 | SELL | 1997.87  | 1996.57  | 149.42     | ✅
+[00:17:10] | INFO | 2026-02-17 11:07:28.474966 | SELL | 1998.55  | 1998.80  | -34.16     | ❌
+[00:17:10] | INFO | 2026-02-17 11:09:28.474966 | SELL | 1998.62  | 1998.62  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 11:34:28.474966 | SELL | 1999.22  | 1999.57  | -26.21     | ❌
+[00:17:10] | INFO | 2026-02-17 13:37:28.474966 | BUY  | 2004.24  | 2004.24  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 14:21:28.474966 | BUY  | 2004.33  | 2006.09  | 151.04     | ✅
+[00:17:10] | INFO | 2026-02-17 15:44:28.474966 | BUY  | 2006.69  | 2006.69  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 16:58:28.474966 | BUY  | 2009.58  | 2009.02  | -38.41     | ❌
+[00:17:10] | INFO | 2026-02-17 17:01:28.474966 | BUY  | 2009.47  | 2008.87  | -44.31     | ❌
+[00:17:10] | INFO | 2026-02-17 17:05:28.474966 | BUY  | 2009.56  | 2009.56  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 17:45:28.474966 | BUY  | 2009.30  | 2009.16  | -15.58     | ❌
+[00:17:10] | INFO | 2026-02-17 18:02:28.474966 | BUY  | 2009.07  | 2010.21  | 152.09     | ✅
+[00:17:10] | INFO | 2026-02-17 18:41:28.474966 | BUY  | 2009.73  | 2009.73  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 18:55:28.474966 | BUY  | 2009.63  | 2009.63  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 19:15:28.474966 | BUY  | 2009.88  | 2009.88  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 19:43:28.474966 | BUY  | 2010.30  | 2009.92  | -70.32     | ❌
+[00:17:10] | INFO | 2026-02-17 19:53:28.474966 | BUY  | 2010.39  | 2010.39  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 22:28:28.474966 | SELL | 2012.45  | 2013.03  | -46.23     | ❌
+[00:17:10] | INFO | 2026-02-17 23:16:28.474966 | SELL | 2014.92  | 2014.92  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 23:32:28.474966 | SELL | 2014.59  | 2014.59  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-17 23:42:28.474966 | SELL | 2014.08  | 2014.08  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 02:39:28.474966 | BUY  | 2017.45  | 2017.45  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 02:57:28.474966 | BUY  | 2017.68  | 2018.55  | 152.01     | ✅
+[00:17:10] | INFO | 2026-02-18 04:17:28.474966 | SELL | 2016.10  | 2016.10  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 04:34:28.474966 | BUY  | 2016.12  | 2016.12  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 04:54:28.474966 | BUY  | 2016.42  | 2016.42  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 04:59:28.474966 | SELL | 2016.04  | 2016.56  | -63.99     | ❌
+[00:17:10] | INFO | 2026-02-18 05:03:28.474966 | SELL | 2016.19  | 2016.19  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 05:28:28.474966 | SELL | 2015.97  | 2016.95  | -102.17    | ❌
+[00:17:10] | INFO | 2026-02-18 05:38:28.474966 | SELL | 2016.24  | 2016.24  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 06:14:28.474966 | SELL | 2016.13  | 2016.40  | -31.34     | ❌
+[00:17:10] | INFO | 2026-02-18 06:16:28.474966 | SELL | 2015.98  | 2016.60  | -60.87     | ❌
+[00:17:10] | INFO | 2026-02-18 06:42:28.474966 | SELL | 2016.75  | 2017.22  | -47.97     | ❌
+[00:17:10] | INFO | 2026-02-18 07:04:28.474966 | SELL | 2017.27  | 2017.27  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 08:11:28.474966 | BUY  | 2016.61  | 2016.61  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 09:27:28.474966 | SELL | 2015.57  | 2015.57  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 09:48:28.474966 | SELL | 2015.23  | 2015.47  | -23.23     | ❌
+[00:17:10] | INFO | 2026-02-18 09:54:28.474966 | SELL | 2015.30  | 2015.72  | -43.46     | ❌
+[00:17:10] | INFO | 2026-02-18 10:08:28.474966 | SELL | 2015.41  | 2015.41  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 11:02:28.474966 | BUY  | 2016.15  | 2015.70  | -43.86     | ❌
+[00:17:10] | INFO | 2026-02-18 11:09:28.474966 | BUY  | 2015.88  | 2015.38  | -99.00     | ❌
+[00:17:10] | INFO | 2026-02-18 12:47:28.474966 | SELL | 2017.50  | 2017.89  | -45.90     | ❌
+[00:17:10] | INFO | 2026-02-18 13:00:28.474966 | SELL | 2017.52  | 2017.52  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 14:19:28.474966 | SELL | 2015.63  | 2015.98  | -33.24     | ❌
+[00:17:10] | INFO | 2026-02-18 14:29:28.474966 | SELL | 2015.80  | 2015.80  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 15:12:28.474966 | SELL | 2016.57  | 2016.88  | -23.89     | ❌
+[00:17:10] | INFO | 2026-02-18 15:25:28.474966 | SELL | 2016.62  | 2017.43  | -96.88     | ❌
+[00:17:10] | INFO | 2026-02-18 15:38:28.474966 | SELL | 2016.76  | 2016.76  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 16:01:28.474966 | SELL | 2017.34  | 2017.34  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 16:07:28.474966 | SELL | 2017.42  | 2018.04  | -80.23     | ❌
+[00:17:10] | INFO | 2026-02-18 16:16:28.474966 | SELL | 2017.21  | 2017.21  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 16:57:28.474966 | SELL | 2017.59  | 2017.59  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 17:20:28.474966 | BUY  | 2017.33  | 2017.33  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 17:53:28.474966 | BUY  | 2018.74  | 2018.74  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 18:36:28.474966 | BUY  | 2018.06  | 2019.62  | 142.31     | ✅
+[00:17:10] | INFO | 2026-02-18 20:35:28.474966 | BUY  | 2019.90  | 2019.90  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 20:45:28.474966 | BUY  | 2019.92  | 2019.92  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 21:59:28.474966 | BUY  | 2018.36  | 2017.91  | -29.40     | ❌
+[00:17:10] | INFO | 2026-02-18 22:15:28.474966 | BUY  | 2018.39  | 2018.39  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 22:55:28.474966 | BUY  | 2019.36  | 2019.36  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 23:20:28.474966 | BUY  | 2018.95  | 2018.95  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-18 23:29:28.474966 | BUY  | 2019.14  | 2020.02  | 144.66     | ✅
+[00:17:10] | INFO | 2026-02-19 00:52:28.474966 | BUY  | 2016.38  | 2016.38  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-19 01:17:28.474966 | BUY  | 2016.99  | 2016.99  | 0.00       | ❌
+[00:17:10] | INFO | 2026-02-19 02:01:28.474966 | SELL | 2016.58  | 2016.58  | 0.00       | ❌
+[00:17:10] | INFO | ================================================================================
+
+[00:17:10] | INFO | 
+==============================
+[00:17:10] | INFO |    🚀 BACKTEST SUMMARY 🚀   
+[00:17:10] | INFO | ==============================
+[00:17:10] | INFO | Total Trades:      78
+[00:17:10] | INFO | Win Rate:          9.0%
+[00:17:10] | INFO | Profit Factor:     0.82
+[00:17:10] | INFO | Max Drawdown:      7.7%
+[00:17:10] | INFO | Total Net Profit:  $-228.00
+[00:17:10] | INFO | Final Balance:     $9772.00
+[00:17:10] | INFO | ==============================
+
