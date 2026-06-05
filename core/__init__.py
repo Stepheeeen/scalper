@@ -1,0 +1,3 @@
+"""
+Core trading logic module
+"""

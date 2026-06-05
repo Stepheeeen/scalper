@@ -1,10 +1,11 @@
 pydantic
+pydantic-settings
 pandas
 numpy
-rich
-pytest
 MetaTrader5
-openai
-requests
-matplotlib
-python-dotenv
+fastapi
+uvicorn
+motor
+jinja2
+scikit-learn
+xgboost

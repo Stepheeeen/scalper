@@ -1,167 +1,201 @@
-import time
-import schedule
-from datetime import datetime
-from config import config
-from data_feed.mt5_adapter import MT5Adapter
-from data_feed.market_data import MarketDataManager
-from engine.setups import SetupEngine
-from engine.confirmation import ConfirmationEngine
-from engine.trade_manager import TradeManager
-from risk.manager import RiskManager
-from utils.telegram import TelegramNotifier
-from utils.ai_assistant import AIAssistant
-from utils.database import DatabaseManager
-from utils.logger import logger
+import asyncio
+import logging
+import pandas as pd
+from datetime import datetime, timezone
+import uvicorn
+from multiprocessing import Process
 
-class NakedPriceActionBot:
-    def __init__(self):
-        self.config = config
-        self.broker = MT5Adapter(config)
-        self.market_data = MarketDataManager()
-        self.setup_engine = SetupEngine()
-        self.risk_manager = RiskManager(config)
-        self.confirmation = ConfirmationEngine(config)
-        self.trade_manager = TradeManager(self.broker, self.risk_manager)
-        self.notifier = TelegramNotifier(config.telegram_token, config.telegram_chat_id)
-        self.ai = AIAssistant(config.ai.api_key)
-        self.db = DatabaseManager()
-        
-        self.is_running = False
+from config.settings import settings
+from config.database import db
+from core.discipline import warden
+from core.ai_engine import ai_engine
+from core.sweep_sensor import sweep_sensor
+from core.risk_manager import risk_manager
+from core.notifier import notifier
+from execution.mt5_router import mt5_router
 
-    def start(self):
-        """Initializes and starts the bot."""
-        if not self.broker.connect():
-            self.notifier.send_alert("ERROR", "Failed to connect to MT5.")
-            return
+# Configure logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
+logger = logging.getLogger("SystemCore")
 
-        self.is_running = True
-        logger.info("Naked Price Action Bot Started.")
-        self.notifier.send_alert("SUCCESS", "Bot Online: Mode 1 (Paper Trading / Rule Engine Only)")
+async def system_log(message: str, level: str = "INFO", notify: bool = False):
+    """Helper to log locally and to MongoDB."""
+    if level == "INFO":
+        logger.info(message)
+    elif level == "WARNING":
+        logger.warning(message)
+    elif level == "ERROR":
+        logger.error(message)
+    elif level == "CRITICAL":
+        logger.critical(message)
         
-        # Schedule Daily Open Summary
-        schedule.every().day.at("06:45").do(self.send_daily_outlook)
+    if db.system_logs is not None:
+        await db.system_logs.insert_one({
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "level": level,
+            "message": message
+        })
         
-        self.run_loop()
+    if notify:
+        prefix = "🟢" if level == "INFO" else "🟡" if level == "WARNING" else "🔴"
+        await notifier.send_message(f"{prefix} <b>XAUUSD System</b>\n{message}")
 
-    def send_daily_outlook(self):
-        """Generates and sends the daily market overview via Telegram."""
-        # Fetch HTF data for bias
-        df_htf = self.broker.get_candles(
-            config.strategy.symbol + config.strategy.symbol_suffix, 
-            config.strategy.htf_timeframe, 100
-        )
-        df_d1 = self.broker.get_candles(
-            config.strategy.symbol + config.strategy.symbol_suffix, "D1", 5
-        )
-        
-        levels = self.market_data.calculate_levels(df_htf, df_d1)
-        bias_info = self.setup_engine.structure.calculate_bias(df_htf)
-        
-        summary_data = {
-            "date": datetime.now().strftime("%Y-%m-%d"),
-            "symbol": config.strategy.symbol,
-            "bias": bias_info['bias'].value,
-            "pdh": levels.get('pdh'),
-            "pdl": levels.get('pdl'),
-            "sessions": "London: 07:00-10:00 | NY: 12:00-15:00 UTC",
-            "scenarios": f"Looking for {bias_info['bias'].value} setups at prior structural levels."
-        }
-        self.notifier.send_daily_open(summary_data)
+def run_dashboard():
+    """Runs the FastAPI dashboard on a separate process."""
+    uvicorn.run("dashboard.api:app", host="0.0.0.0", port=8000, log_level="info")
 
-    def run_loop(self):
-        """Main execution loop."""
-        while self.is_running:
-            try:
-                now_utc = datetime.utcnow()
-                session_status = self.market_data.get_session_status(now_utc)
+async def trading_loop():
+    """The core asynchronous trading loop."""
+    await system_log("Trading loop starting...", "INFO")
+    
+    while True:
+        try:
+            # 1. Gatekeeper Check
+            is_allowed, reason = await warden.is_execution_allowed()
+            if not is_allowed:
+                await system_log(f"Execution blocked: {reason}", "INFO")
+                await asyncio.sleep(60) # Sleep and check again in a minute
+                continue
                 
-                # Update account and risk stats
-                acc = self.broker.get_account_info()
-                if acc:
-                    self.db.log_equity(acc['balance'], acc['equity'])
-                    # Daily stats check
-                    if not self.risk_manager.enforce_daily_limits(acc['balance'], acc['equity']):
-                        time.sleep(60)
-                        continue
+            if risk_manager.is_auto_killed:
+                await system_log("System is frozen due to Daily Drawdown Auto-Kill.", "CRITICAL", notify=True)
+                await asyncio.sleep(300)
+                continue
 
-                # 1. Manage Active Positions
-                tick = {"bid": mt5.symbol_info_tick(config.strategy.symbol + config.strategy.symbol_suffix).bid,
-                        "ask": mt5.symbol_info_tick(config.strategy.symbol + config.strategy.symbol_suffix).ask}
-                self.trade_manager.manage_lifecycle(tick)
-
-                # 2. Scanning Block (Only during sessions)
-                if session_status['is_market_open']:
-                    symbol = config.strategy.symbol + config.strategy.symbol_suffix
-                    df_entry = self.broker.get_candles(symbol, config.strategy.entry_timeframe, 100)
-                    df_htf = self.broker.get_candles(symbol, config.strategy.htf_timeframe, 100)
-                    df_d1 = self.broker.get_candles(symbol, "D1", 5)
-                    
-                    levels = self.market_data.calculate_levels(df_htf, df_d1)
-                    market_context = {
-                        "is_market_open": True,
-                        "bias": self.setup_engine.structure.calculate_bias(df_htf)['bias'].value,
-                        **levels
-                    }
-
-                    setups = self.setup_engine.scan({"entry": df_entry, "htf": df_htf}, levels)
-                    
-                    for setup in setups:
-                        # Validation & Confirmation
-                        valid_setup = self.confirmation.validate_setup(setup, market_context)
-                        
-                        if valid_setup:
-                            self.handle_execution(valid_setup, acc['balance'])
-                        elif config.log_skipped_setups:
-                            # Log skipped setup for auditing
-                            ai_explanation = self.ai.explain_skipped_setup(setup, "Low confluence or poor RR")
-                            self.db.log_skipped_setup({
-                                "symbol": config.strategy.symbol,
-                                "strategy": setup['type'],
-                                "reason": ai_explanation,
-                                "score": setup.get('confluence_score', 0),
-                                "context": str(market_context)
-                            })
-
-                schedule.run_pending()
-
-            except Exception as e:
-                logger.error(f"Main loop error: {e}")
-                time.sleep(30)
+            # 2. Fetch Market Data
+            raw_4h = await mt5_router.get_candles("H4", 100)
+            raw_15m = await mt5_router.get_candles("M15", 100)
             
-            time.sleep(10)
+            if not raw_4h or not raw_15m:
+                await system_log("Failed to fetch MT5 market data.", "WARNING")
+                await asyncio.sleep(10)
+                continue
+                
+            # Convert to Pandas DataFrames
+            df_4h = pd.DataFrame(raw_4h)
+            df_4h['time'] = pd.to_datetime(df_4h['time'], unit='s')
+            df_4h.set_index('time', inplace=True)
+            
+            df_15m = pd.DataFrame(raw_15m)
+            df_15m['time'] = pd.to_datetime(df_15m['time'], unit='s')
+            df_15m.set_index('time', inplace=True)
+            
+            # 3. Time-frame Architecture & Feature Extraction
+            current_date = pd.Timestamp(datetime.now(timezone.utc))
+            ai_engine.macro.update_structure(df_4h)
+            ai_engine.asian_range.calculate_range(df_15m, current_date)
+            
+            boundaries = []
+            asian_b = ai_engine.asian_range.get_boundaries()
+            if asian_b['asian_high']: boundaries.append(asian_b['asian_high'])
+            if asian_b['asian_low']: boundaries.append(asian_b['asian_low'])
+            
+            # We check the most recently *closed* 15m candle (index -2 usually, if -1 is active)
+            # Assuming MT5 returns active candle at -1
+            closed_candle = df_15m.iloc[-2] 
+            
+            # 4. Trigger Check
+            signal = sweep_sensor.check_for_sweep(closed_candle, boundaries)
+            
+            if signal:
+                await system_log(f"Raw Signal Detected: {signal['type']} at level {signal['level_swept']}", "INFO")
+                
+                # 5. AI Filter
+                features = {
+                    "price": signal['entry'],
+                    # DXY, ATR, Volume Profile mock
+                }
+                
+                if ai_engine.filter.is_signal_approved(features):
+                    await system_log("Signal APPROVED by AI Filter.", "INFO")
+                    
+                    # 6. Risk Management & Execution
+                    acc_info = await mt5_router.get_account_info()
+                    if not acc_info:
+                        await system_log("Could not retrieve account info for execution.", "ERROR")
+                        continue
+                        
+                    balance = acc_info.get('balance', 0.0)
+                    equity = acc_info.get('equity', 0.0)
+                    
+                    risk_manager.set_daily_starting_balance(balance)
+                    
+                    if risk_manager.check_daily_drawdown(equity):
+                        continue # Auto-kill triggered
+                        
+                    lot_size, adjusted_sl = risk_manager.calculate_lot_size(balance, signal['entry'], signal['stop_loss'])
+                    
+                    if lot_size <= 0:
+                        await system_log("Calculated lot size is invalid.", "ERROR")
+                        continue
+                        
+                    tp_price = risk_manager.calculate_take_profit(signal['entry'], adjusted_sl)
+                    
+                    # Determine Buy or Sell
+                    side = "BUY" if signal['type'] == "bullish_sweep" else "SELL"
+                    
+                    await system_log(f"Executing {side} {lot_size} lots. SL: {adjusted_sl}, TP: {tp_price}", "INFO", notify=True)
+                    
+                    if not settings.paper_trading:
+                        result = await mt5_router.execute_bracket_order(side, lot_size, adjusted_sl, tp_price)
+                        
+                        if result['success']:
+                            # Log trade to DB
+                            trade_doc = {
+                                "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+                                "timestamp": datetime.now(timezone.utc).isoformat(),
+                                "ticket": result['ticket'],
+                                "type": side,
+                                "entry": result['price'],
+                                "sl": adjusted_sl,
+                                "tp": tp_price,
+                                "volume": result['volume']
+                            }
+                            await db.trades.insert_one(trade_doc)
+                            await system_log(f"Trade successfully logged to MongoDB. Ticket: {result['ticket']}", "INFO", notify=True)
+                        else:
+                            await system_log(f"Order failed: {result.get('error')}", "ERROR", notify=True)
+                    else:
+                        await system_log("PAPER TRADING: Execution skipped.", "INFO", notify=True)
 
-    def handle_execution(self, setup: Dict, balance: float):
-        """Processes a validated setup and executes if possible."""
-        # Calculate Risk and Position
-        lots = self.risk_manager.calculate_position_size(balance, setup['entry_price'], setup['stop_loss'])
-        
-        # AI Commentary
-        commentary = self.ai.generate_setup_commentary(setup, {"bias": setup['bias_alignment']})
-        
-        res = self.broker.execute_order(
-            config.strategy.symbol + config.strategy.symbol_suffix,
-            setup['side'], lots, setup['stop_loss'], setup['tp']
-        )
-        
-        if res:
-            trade_data = {
-                "strategy": setup['type'],
-                "side": setup['side'],
-                "entry": setup['entry_price'],
-                "sl": setup['stop_loss'],
-                "tp": setup['tp'],
-                "rr": setup['rr'],
-                "risk_percent": config.risk.risk_per_trade_percent,
-                "rationale": commentary
-            }
-            self.notifier.send_entry_alert(trade_data)
-            self.trade_manager.add_position(res['ticket'], setup['side'], setup['entry_price'], setup['stop_loss'], setup['tp'], lots)
+                else:
+                    await system_log("Signal REJECTED by AI Filter.", "INFO")
+            
+            # Sleep until next potential candle check
+            await asyncio.sleep(60)
 
-    def stop(self):
-        self.is_running = False
-        self.broker.disconnect()
+        except Exception as e:
+            await system_log(f"Unexpected error in trading loop: {str(e)}", "ERROR")
+            await asyncio.sleep(30)
+
+async def main():
+    await system_log("Starting XAUUSD Algo System...", "INFO", notify=True)
+    
+    # Init DB
+    await db.connect()
+    
+    # Init MT5
+    connected = await mt5_router.connect()
+    if not connected:
+        await system_log("Failed to connect to MT5. Exiting...", "CRITICAL", notify=True)
+        return
+        
+    # Start Dashboard on a separate process
+    dashboard_process = Process(target=run_dashboard)
+    dashboard_process.start()
+    
+    try:
+        await trading_loop()
+    except asyncio.CancelledError:
+        pass
+    finally:
+        await mt5_router.disconnect()
+        await db.disconnect()
+        dashboard_process.terminate()
+        await system_log("System Shutdown.", "INFO")
 
 if __name__ == "__main__":
-    import MetaTrader5 as mt5
-    bot = NakedPriceActionBot()
-    bot.start()
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        logger.info("Keyboard interrupt received. Shutting down.")
