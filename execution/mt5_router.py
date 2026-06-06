@@ -60,7 +60,7 @@ class MT5Router:
             
         return acc_info._asdict()
 
-    async def get_candles(self, timeframe: str, count: int) -> list:
+    async def get_candles(self, timeframe: str, count: int, symbol: str = None) -> list:
         """Fetches OHLCV data."""
         if not self.connected:
             return []
@@ -77,9 +77,13 @@ class MT5Router:
             logger.error(f"Unsupported timeframe {timeframe}")
             return []
             
-        rates = await asyncio.to_thread(mt5.copy_rates_from_pos, settings.symbol, mt5_tf, 0, count)
+        target_symbol = symbol if symbol else settings.symbol
+        # Ensure symbol is visible in Market Watch
+        await asyncio.to_thread(mt5.symbol_select, target_symbol, True)
+        
+        rates = await asyncio.to_thread(mt5.copy_rates_from_pos, target_symbol, mt5_tf, 0, count)
         if rates is None:
-            logger.error(f"Failed to get rates for {settings.symbol}: {mt5.last_error()}")
+            logger.error(f"Failed to get rates for {target_symbol}: {mt5.last_error()}")
             return []
             
         return rates

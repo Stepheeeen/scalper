@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     # App configs
     symbol: str = Field("XAUUSDm", env="SYMBOL")
     paper_trading: bool = Field(True, env="PAPER_TRADING")
+    bypass_session_check: bool = Field(False, env="BYPASS_SESSION_CHECK")
     
     # MongoDB configs
     mongodb_uri: str = Field("mongodb://localhost:27017", env="MONGODB_URI")
@@ -22,6 +23,7 @@ class Settings(BaseSettings):
     mt5_password: Optional[str] = Field(None, env="MT5_PASSWORD")
     mt5_server: Optional[str] = Field(None, env="MT5_SERVER")
     mt5_path: Optional[str] = Field(None, env="MT5_PATH") # Useful if custom install path
+    xgboost_model_path: Optional[str] = Field(None, env="XGBOOST_MODEL_PATH")
     
     # Telegram configs
     telegram_token: Optional[str] = Field(None, env="TELEGRAM_TOKEN")

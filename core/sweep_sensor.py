@@ -33,24 +33,28 @@ class SweepSensor:
             if low_p < level and close_p > level:
                 lower_wick = min(open_p, close_p) - low_p
                 # Ensure the wick is prominent
-                if lower_wick / candle_range >= self.wick_threshold_ratio:
+                wick_ratio = lower_wick / candle_range
+                if wick_ratio >= self.wick_threshold_ratio:
                     return {
                         "type": "bullish_sweep",
                         "level_swept": level,
                         "entry": close_p,
                         "stop_loss": low_p, # SL at the extreme tip of the rejection wick
+                        "wick_ratio": wick_ratio
                     }
                     
             # Bearish Sweep (Sweeps above a resistance level, then closes below it)
             elif high_p > level and close_p < level:
                 upper_wick = high_p - max(open_p, close_p)
                 # Ensure the wick is prominent
-                if upper_wick / candle_range >= self.wick_threshold_ratio:
+                wick_ratio = upper_wick / candle_range
+                if wick_ratio >= self.wick_threshold_ratio:
                     return {
                         "type": "bearish_sweep",
                         "level_swept": level,
                         "entry": close_p,
                         "stop_loss": high_p, # SL at the extreme tip of the rejection wick
+                        "wick_ratio": wick_ratio
                     }
                     
         return None

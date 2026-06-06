@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import pandas as pd
+import numpy as np
 from datetime import datetime, timezone
 import uvicorn
 from multiprocessing import Process
@@ -15,7 +16,14 @@ from core.notifier import notifier
 from execution.mt5_router import mt5_router
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    handlers=[
+        logging.FileHandler("system.log", encoding="utf-8"),
+        logging.StreamHandler()
+    ]
+)
 logger = logging.getLogger("SystemCore")
 
 async def system_log(message: str, level: str = "INFO", notify: bool = False):
@@ -50,6 +58,22 @@ async def trading_loop():
     
     while True:
         try:
+            # Weekend Market Close Check
+            if warden.is_market_closed():
+                sleep_seconds = warden.get_seconds_until_market_open()
+                hours = sleep_seconds / 3600.0
+                await system_log(f"Market is closed for the weekend. Sleeping for {hours:.2f} hours.", "INFO")
+                await asyncio.sleep(sleep_seconds)
+                continue
+
+            # Weekday Session Close Check (if not bypassed)
+            if not settings.bypass_session_check and not warden.is_valid_trading_session():
+                sleep_seconds = warden.get_seconds_until_next_session()
+                hours = sleep_seconds / 3600.0
+                await system_log(f"Outside valid trading sessions (London/NY). Sleeping for {hours:.2f} hours.", "INFO")
+                await asyncio.sleep(sleep_seconds)
+                continue
+
             # 1. Gatekeeper Check
             is_allowed, reason = await warden.is_execution_allowed()
             if not is_allowed:
@@ -66,7 +90,7 @@ async def trading_loop():
             raw_4h = await mt5_router.get_candles("H4", 100)
             raw_15m = await mt5_router.get_candles("M15", 100)
             
-            if not raw_4h or not raw_15m:
+            if raw_4h is None or len(raw_4h) == 0 or raw_15m is None or len(raw_15m) == 0:
                 await system_log("Failed to fetch MT5 market data.", "WARNING")
                 await asyncio.sleep(10)
                 continue
@@ -75,10 +99,30 @@ async def trading_loop():
             df_4h = pd.DataFrame(raw_4h)
             df_4h['time'] = pd.to_datetime(df_4h['time'], unit='s')
             df_4h.set_index('time', inplace=True)
+            if 'tick_volume' in df_4h.columns:
+                df_4h.rename(columns={'tick_volume': 'volume'}, inplace=True)
             
             df_15m = pd.DataFrame(raw_15m)
             df_15m['time'] = pd.to_datetime(df_15m['time'], unit='s')
             df_15m.set_index('time', inplace=True)
+            if 'tick_volume' in df_15m.columns:
+                df_15m.rename(columns={'tick_volume': 'volume'}, inplace=True)
+            
+            # Calculate Indicators for AI Filter
+            high_low = df_15m['high'] - df_15m['low']
+            high_cp = np.abs(df_15m['high'] - df_15m['close'].shift(1))
+            low_cp = np.abs(df_15m['low'] - df_15m['close'].shift(1))
+            tr = pd.concat([high_low, high_cp, low_cp], axis=1).max(axis=1)
+            df_15m['atr'] = tr.rolling(window=14).mean()
+            
+            delta = df_15m['close'].diff()
+            gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
+            loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
+            rs = gain / (loss + 1e-10)
+            df_15m['rsi'] = 100 - (100 / (1 + rs))
+            
+            vol_sma = df_15m['volume'].rolling(20).mean()
+            df_15m['volume_ratio'] = df_15m['volume'] / (vol_sma + 1e-10)
             
             # 3. Time-frame Architecture & Feature Extraction
             current_date = pd.Timestamp(datetime.now(timezone.utc))
@@ -94,6 +138,15 @@ async def trading_loop():
             # Assuming MT5 returns active candle at -1
             closed_candle = df_15m.iloc[-2] 
             
+            # Fetch macro structure swing points and add to boundaries
+            pools = ai_engine.macro.get_nearest_liquidity_pools(closed_candle['close'])
+            if pools.get('nearest_high'):
+                boundaries.append(pools['nearest_high'])
+            if pools.get('nearest_low'):
+                boundaries.append(pools['nearest_low'])
+                
+            await system_log(f"Active boundaries for sweep check: {boundaries}", "INFO")
+            
             # 4. Trigger Check
             signal = sweep_sensor.check_for_sweep(closed_candle, boundaries)
             
@@ -102,8 +155,10 @@ async def trading_loop():
                 
                 # 5. AI Filter
                 features = {
-                    "price": signal['entry'],
-                    # DXY, ATR, Volume Profile mock
+                    "atr": float(closed_candle.get("atr", 0.0)),
+                    "rsi": float(closed_candle.get("rsi", 0.0)),
+                    "volume_ratio": float(closed_candle.get("volume_ratio", 1.0)),
+                    "wick_ratio": float(signal.get("wick_ratio", 0.5))
                 }
                 
                 if ai_engine.filter.is_signal_approved(features):
@@ -160,6 +215,8 @@ async def trading_loop():
 
                 else:
                     await system_log("Signal REJECTED by AI Filter.", "INFO")
+            else:
+                await system_log("No liquidity sweep detected on the last closed candle.", "INFO")
             
             # Sleep until next potential candle check
             await asyncio.sleep(60)
@@ -173,6 +230,10 @@ async def main():
     
     # Init DB
     await db.connect()
+    
+    # Load AI Filter model
+    if settings.xgboost_model_path:
+        ai_engine.filter.load_model(settings.xgboost_model_path)
     
     # Init MT5
     connected = await mt5_router.connect()

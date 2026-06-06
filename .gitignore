@@ -7,4 +7,5 @@ bot_data.db
 test_bot.db
 logs/
 .DS_Store
-equity_curve.png
+system.log
+*.log

@@ -11,7 +11,10 @@ class Database:
 
     async def connect(self):
         """Connects to the MongoDB server."""
-        self.client = AsyncIOMotorClient(settings.mongodb_uri)
+        self.client = AsyncIOMotorClient(
+            settings.mongodb_uri,
+            tlsAllowInvalidCertificates=True
+        )
         self.db = self.client[settings.db_name]
         
         self.trades = self.db["trades"]

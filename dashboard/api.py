@@ -29,11 +29,14 @@ async def read_root(request: Request):
     logs_cursor = db.system_logs.find().sort("timestamp", -1).limit(20) if db.system_logs is not None else []
     recent_logs = await logs_cursor.to_list(length=20) if logs_cursor else []
     
-    return templates.TemplateResponse("index.html", {
-        "request": request,
-        "trades": recent_trades,
-        "logs": recent_logs
-    })
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html",
+        context={
+            "trades": recent_trades,
+            "logs": recent_logs
+        }
+    )
 
 @app.get("/api/stats")
 async def get_stats():

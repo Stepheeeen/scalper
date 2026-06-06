@@ -9,3 +9,4 @@ motor
 jinja2
 scikit-learn
 xgboost
+requests
